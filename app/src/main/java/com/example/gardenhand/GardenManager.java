@@ -1,5 +1,6 @@
 package com.example.gardenhand;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,4 +26,10 @@ public class GardenManager extends AppCompatActivity {
             }
         });
     }
+
+    public void addPlantButtonClick(View view){
+        Intent intent = new Intent(this, AddPlantActivity.class);
+        startActivity(intent);
+    }
+
 }
