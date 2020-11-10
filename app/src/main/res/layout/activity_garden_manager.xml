@@ -26,6 +26,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:onClick="addPlantButtonClick"
         android:text="@string/add_plant" />
 
     <include layout="@layout/content_garden_manager" />

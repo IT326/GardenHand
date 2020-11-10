@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
 
 public class FirstFragment extends Fragment {
 
@@ -27,8 +32,14 @@ public class FirstFragment extends Fragment {
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                PlantApiCaller apicall = new PlantApiCaller();
+                try {
+                    apicall.searchPlant();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

@@ -23,4 +23,9 @@
     <string name="title_activity_add_plant">AddPlantActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plants">Plants</string>
+    <string name="plants_to_add">Plants to Add</string>
+    <string name="search_plant">Search Plant</string>
 </resources>

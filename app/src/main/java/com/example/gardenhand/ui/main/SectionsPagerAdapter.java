@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.gardenhand.FirstFragment;
 import com.example.gardenhand.R;
+import com.example.gardenhand.SecondFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -15,31 +17,41 @@ import com.example.gardenhand.R;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+
+    private static final String[] TAB_TITLES = new String[]{"Add Plant","Find Plant"};
     private final Context mContext;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    int totalTabs;
+
+    public SectionsPagerAdapter(Context context, FragmentManager fm,int totalTabs) {
         super(fm);
         mContext = context;
+        this.totalTabs = totalTabs;
     }
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        switch (position){
+            case 0:
+                FirstFragment firstFragment = new FirstFragment();
+                return firstFragment;
+            case 1:
+                SecondFragment secondFragment = new SecondFragment();
+                return secondFragment;
+            default: return  null;
+        }
+
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getString(TAB_TITLES[position]);
+        return TAB_TITLES[position];
     }
 
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 2;
+        return totalTabs;
     }
 }

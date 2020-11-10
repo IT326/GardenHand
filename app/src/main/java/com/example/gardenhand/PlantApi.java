@@ -1,7 +1,9 @@
+package com.example.gardenhand;
+
 import com.loopj.android.http.*;
 
 public class PlantApi {
-   private static final String PLANTBASEAPI = "trefle.io/api/v1/plants";
+   private static final String PLANTBASEAPI = "https://trefle.io/api/v1/plants";
    private static final String PLANTAPITOKEN = "A5x32nhndnuaaNfm5-avmytk5xEn_1X0o72WhP11Cq4";
    private static AsyncHttpClient client = new AsyncHttpClient();
 
@@ -24,6 +26,7 @@ public class PlantApi {
    }
 
    private static String getAbsoluteUrl(String relativeUrl) {
+      System.out.println(PLANTBASEAPI + relativeUrl);
       return PLANTBASEAPI + relativeUrl;
    }
 
