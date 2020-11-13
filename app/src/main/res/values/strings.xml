@@ -28,4 +28,11 @@
     <string name="plants">Plants</string>
     <string name="plants_to_add">Plants to Add</string>
     <string name="search_plant">Search Plant</string>
+    <string name="view_friends_list">View Friends List</string>
+    <string name="your_garden">Your Garden</string>
+    <string name="find_vendors">Find Vendors</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="title_activity_friends_list">FriendsListActivity</string>
+    <string name="addfriend">addFriend</string>
+    <string name="title_activity_garden_view">GardenView</string>
 </resources>

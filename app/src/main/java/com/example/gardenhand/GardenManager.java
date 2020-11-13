@@ -17,14 +17,7 @@ public class GardenManager extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     public void addPlantButtonClick(View view){
@@ -32,4 +25,12 @@ public class GardenManager extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void friendsListClick(View view){
+        Intent intent = new Intent(this, FriendsListActivity.class);
+        startActivity(intent);
+    }
+    public void yourGardenClick(View view){
+        Intent intent = new Intent(this, GardenView.class);
+        startActivity(intent);
+    }
 }
