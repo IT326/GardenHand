@@ -20,6 +20,16 @@ public class GardenManager extends AppCompatActivity {
 
     }
 
+    public void settingsButtonClick(View view){
+        Intent intent = new Intent(this, SearchView.class);
+        startActivity(intent);
+    }
+
+    public void searchButtonClick(View view){
+        Intent intent = new Intent(this, SearchView.class);
+        startActivity(intent);
+    }
+
     public void addPlantButtonClick(View view){
         Intent intent = new Intent(this, AddPlantActivity.class);
         startActivity(intent);

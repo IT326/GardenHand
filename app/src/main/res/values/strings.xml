@@ -35,4 +35,6 @@
     <string name="title_activity_friends_list">FriendsListActivity</string>
     <string name="addfriend">addFriend</string>
     <string name="title_activity_garden_view">GardenView</string>
+    <string name="title_activity_search_view">SearchView</string>
+    <string name="title_activity_setting">SettingActivity</string>
 </resources>

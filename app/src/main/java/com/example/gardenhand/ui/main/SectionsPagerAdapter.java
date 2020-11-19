@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.gardenhand.FirstFragment;
 import com.example.gardenhand.R;
+import com.example.gardenhand.SearchView;
 import com.example.gardenhand.SecondFragment;
 
 /**
@@ -27,6 +28,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         mContext = context;
         this.totalTabs = totalTabs;
+    }
+
+    public SectionsPagerAdapter(SearchView searchView, FragmentManager supportFragmentManager) {
+        super(supportFragmentManager);
+        mContext = searchView.getBaseContext();
+
     }
 
     @Override
