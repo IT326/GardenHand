@@ -2,11 +2,13 @@ package com.example.gardenhand.ui.main;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.gardenhand.FirstFragment;
+import com.example.gardenhand.R;
 import com.example.gardenhand.SearchView;
 import com.example.gardenhand.SecondFragment;
 
@@ -14,7 +16,7 @@ import com.example.gardenhand.SecondFragment;
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class PlantTabsPagerAdapter extends FragmentPagerAdapter {
 
 
     private static final String[] TAB_TITLES = new String[]{"Add Plant","Find Plant"};
@@ -22,13 +24,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     int totalTabs;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm, int totalTabs) {
+    public PlantTabsPagerAdapter(Context context, FragmentManager fm, int totalTabs) {
         super(fm);
         mContext = context;
         this.totalTabs = totalTabs;
     }
 
-    public SectionsPagerAdapter(SearchView searchView, FragmentManager supportFragmentManager) {
+    public PlantTabsPagerAdapter(SearchView searchView, FragmentManager supportFragmentManager) {
         super(supportFragmentManager);
         mContext = searchView.getBaseContext();
 
