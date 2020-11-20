@@ -31,10 +31,6 @@ public class AddPlantActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab thistab) {
                 int position = thistab.getPosition();
-                switch(position){
-                    case 0:
-
-                }
             }
 
             @Override

@@ -2,15 +2,13 @@ package com.example.gardenhand.ui.main;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.gardenhand.FirstFragment;
-import com.example.gardenhand.R;
+import com.example.gardenhand.addPlantFragment;
 import com.example.gardenhand.SearchView;
-import com.example.gardenhand.SecondFragment;
+import com.example.gardenhand.SearchPlantFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -40,10 +38,10 @@ public class PlantTabsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                FirstFragment firstFragment = new FirstFragment();
+                addPlantFragment firstFragment = new addPlantFragment();
                 return firstFragment;
             case 1:
-                SecondFragment secondFragment = new SecondFragment();
+                SearchPlantFragment secondFragment = new SearchPlantFragment();
                 return secondFragment;
             default: return  null;
         }

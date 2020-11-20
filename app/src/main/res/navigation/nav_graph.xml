@@ -9,7 +9,7 @@
         android:id="@+id/FirstFragment"
         android:name="com.example.gardenhand.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_addplant">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/First2Fragment"
-        android:name="com.example.gardenhand.First2Fragment"
+        android:name="com.example.gardenhand.addPlantFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first2">
 
@@ -37,9 +37,9 @@
     </fragment>
     <fragment
         android:id="@+id/Second2Fragment"
-        android:name="com.example.gardenhand.Second2Fragment"
+        android:name="com.example.gardenhand.SearchPlantFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second2">
+        tools:layout="@layout/fragment_searchplant">
 
         <action
             android:id="@+id/action_Second2Fragment_to_First2Fragment"

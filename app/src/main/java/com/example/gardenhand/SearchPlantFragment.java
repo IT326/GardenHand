@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
-import androidx.navigation.fragment.NavHostFragment;
-
-public class Second2Fragment extends Fragment {
+public class SearchPlantFragment extends Fragment {
 
     @Override
     public View onCreateView(
@@ -18,17 +16,18 @@ public class Second2Fragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second2, container, false);
+        return inflater.inflate(R.layout.fragment_searchplant, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_searchplant).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Second2Fragment.this)
-                        .navigate(R.id.action_Second2Fragment_to_First2Fragment);
+                PlantApiCaller apicall = new PlantApiCaller();
+                Search searcher = new Search("Carrot",SearchPlantFragment.this.getContext());
+               // searcher.findPlant();
             }
         });
     }
