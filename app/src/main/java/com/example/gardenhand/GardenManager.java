@@ -21,7 +21,7 @@ public class GardenManager extends AppCompatActivity {
     }
 
     public void settingsButtonClick(View view){
-        Intent intent = new Intent(this, SearchView.class);
+        Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
 
