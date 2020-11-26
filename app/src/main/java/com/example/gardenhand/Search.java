@@ -26,7 +26,7 @@ public class Search {
                 public void onSuccess(JSONObject result) {
                     try {
                         JSONArray resarray = (JSONArray) apicall.response.get("data");
-                        JSONObject resResult = (JSONObject) resarray.get(0);
+                        JSONObject resResult = (JSONObject) resarray.get(0);//eventually will pass this to call back to go through each result returned
                         String plantName = resResult.getString("common_name");
                         setJSONobj(resResult);
                         callback.onSuccess(resResult);

@@ -45,6 +45,8 @@ public class addPlantFragment extends Fragment {
                         try {
                             String plantName = result.getString("common_name");
                             text.setText(plantName);
+                            //for each in result add to list view
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
