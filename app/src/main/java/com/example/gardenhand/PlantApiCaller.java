@@ -52,7 +52,8 @@ public class PlantApiCaller {
                 try{
                     JSONObject jsonObject = new JSONObject(response);
                     setJSONobj(jsonObject);
-                    callback.onSuccess(jsonObject);
+                    JSONArray resResult= (JSONArray) jsonObject.get("data");
+                    callback.onSuccess(resResult);
                 }catch(JSONException err){
                     err.printStackTrace();
                 }
