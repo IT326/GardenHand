@@ -10,26 +10,30 @@
         android:id="@+id/button_searchplant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="480dp"
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_plantsearch" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textview_plantsearch"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/searchtext"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_searchplant"
+        android:hint="Search a Plant"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/button_searchplant"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.882" />
 
     <ListView
         android:id="@+id/plantList"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="64dp"
+        android:layout_width="407dp"
+        android:layout_height="473dp"
         android:divider="#000"
         android:dividerHeight="1dp"
         android:footerDividersEnabled="false"
@@ -37,6 +41,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/button_searchplant"
+        app:layout_constraintVertical_bias="1.0">
+
+    </ListView>
 </android.support.constraint.ConstraintLayout>

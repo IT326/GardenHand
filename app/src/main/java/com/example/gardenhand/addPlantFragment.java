@@ -40,6 +40,7 @@ public class addPlantFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final TextView text = view.findViewById(R.id.textview_addplant);
         final ListView listv = view.findViewById(R.id.plantList);
+
         final Button buttv =  view.findViewById(R.id.button_addplant);
 
         view.findViewById(R.id.button_addplant).setOnClickListener(new View.OnClickListener() {
@@ -69,8 +70,8 @@ public class addPlantFragment extends Fragment {
                             PlantListAdapter plAdapter = new PlantListAdapter(addPlantFragment.this.getContext(),plantList);
                             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
                             listv.setAdapter(plAdapter);
-                            text.setVisibility(View.INVISIBLE);
-                            buttv.setVisibility(View.INVISIBLE);
+                            //text.setVisibility(View.INVISIBLE);
+                           // buttv.setVisibility(View.INVISIBLE);
 
 
                         } catch (JSONException e) {
