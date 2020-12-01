@@ -11,6 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class PlantListAdapter implements ListAdapter{
 
     ArrayList<Plant> arrayList;
@@ -51,13 +55,60 @@ public class PlantListAdapter implements ListAdapter{
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Plant plant = arrayList.get(position);
+        final Plant plant = arrayList.get(position);
+        //set onclick for row some how
+        //onclick create search
+        //retrieve plantby id
+        //get callback
+        //move to plantview page on succeess
         if(convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             convertView = layoutInflater.inflate(R.layout.plantlist_row, null);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    System.out.println("touched "+plant.id);
+                    Search searcher = new Search(plant.id, PlantListAdapter.this.context);
+                    searcher.retrievePlant(new JSOCallback() {
+                        @Override
+                        public void onSuccess(JSONObject resResult) {
+                           // System.out.println(resResult.length());
+                            Integer min;
+                            Integer max;
+
+                            JSONObject jsonObject = resResult;
+                            try {
+                                jsonObject = (JSONObject) resResult.get("growth");
+                               jsonObject = (JSONObject) jsonObject.get("minimum_precipitation");
+                               if(!jsonObject.isNull("mm")) {
+                                   min = jsonObject.getInt("mm");
+                               }else{
+                                   min = 0;
+                               }
+                                jsonObject = (JSONObject) resResult.get("growth");
+                                jsonObject = (JSONObject) jsonObject.get("maximum_precipitation");
+                                if(!jsonObject.isNull("mm")) {
+                                    max = jsonObject.getInt("mm");
+                                }else{
+                                    max = 400;
+                                }
+                                    plant.setPrecipitation(max, min);
+
+                                System.out.println("plant clicked water days "+plant.daystowater);
+                               // jsonObject = (JSONObject) jsonObject.get("mm");
+                            }catch (JSONException e){
+                                plant.setPrecipitation(400, 0);
+                                e.printStackTrace();
+                            }
+
+                            //make plant with id common_name, precipicatation, url
+                            //get context then move to plantview and pass it plant and context
+
+                            //context add plant some how
+                            //add plant from garden????
+                            
+                        }
+                    });
                 }
             });
             TextView tittle = convertView.findViewById(R.id.plantlist_name);

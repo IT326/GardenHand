@@ -8,6 +8,7 @@ public class Plant {
     String photourl;
     //String id;
     int id;
+    int daystowater;
     //Plant seedParent = null;
     private Dictionary<Date,Double> plantHistory;
     private Date lastWater;
@@ -38,5 +39,8 @@ public class Plant {
         outstr+="\nid" + this.id;
 
         return outstr;
+    }
+    public void setPrecipitation(int maxprecip, int minprecip){
+        daystowater=(maxprecip-minprecip)/200;
     }
 }

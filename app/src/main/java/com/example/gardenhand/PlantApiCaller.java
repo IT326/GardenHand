@@ -30,21 +30,45 @@ public class PlantApiCaller {
     public JSONObject response = new JSONObject();
     public Boolean wait = true;
 
+
+    public void getPlant(String input, Context context, final JSOCallback callback) throws JSONException {
+        String url = PLANTBASEAPI+"/"+input+"?token="+PLANTAPITOKEN;
+        //input should be id
+        //check if number
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringrequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
+           @Override
+           public void onResponse(String response){
+               try {
+                   JSONArray resResult = new JSONArray();
+                   JSONObject jsonObject = new JSONObject(response);
+                   setJSONobj(jsonObject);
+                   jsonObject = (JSONObject) jsonObject.get("data");
+                   jsonObject = (JSONObject) jsonObject.get("main_species");
+                  // jsonObject = jsonObject.get("growth");
+                   callback.onSuccess(jsonObject);
+
+               }catch(JSONException err){
+                   err.printStackTrace();
+
+               }
+
+           }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("unsuccessful");
+            }
+        });
+
+        queue.add(stringrequest);
+    }
+
     public void searchPlant(String input, Context context, final VolleyCallback callback) throws JSONException {
-        //input
-       // String input = "tomato";
-      //  final JSONObject[] results = {new JSONObject()};
+
         String relurl = "/search";
-        RequestParams params = new RequestParams();
-        params.put("q",input);
-        String plant ="he;p";
         RequestQueue queue = Volley.newRequestQueue(context);
         String ghettourl = PLANTBASEAPI+relurl+"?token="+PLANTAPITOKEN+"&q="+input;
-
-       // final RequestFuture<JSONObject> future = RequestFuture.newFuture();
-
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, ghettourl, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
