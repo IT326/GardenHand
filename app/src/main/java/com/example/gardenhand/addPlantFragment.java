@@ -5,17 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+
+
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.navigation.fragment.NavHostFragment;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
@@ -36,7 +32,7 @@ public class addPlantFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_add_plant, container, false);
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final TextView text = view.findViewById(R.id.textview_addplant);
         final ListView listv = view.findViewById(R.id.plantList);

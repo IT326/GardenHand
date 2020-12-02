@@ -1,6 +1,8 @@
 package com.example.gardenhand.ui.main;
 
 import android.content.Context;
+//import android.support.v4.app.FragmentPagerAdapter;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
