@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "402703543728",
+    "firebase_url": "https://garden-hand-fb7c6.firebaseio.com",
+    "project_id": "garden-hand-fb7c6",
+    "storage_bucket": "garden-hand-fb7c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402703543728:android:5352972b4f32c7317cba75",
+        "android_client_info": {
+          "package_name": "com.example.gardenhand"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402703543728-hmgmtae583dabkcut23gkr38obllokun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdfOtTysNocmLX7ASmwqas0B5hUnFi1vA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402703543728-hmgmtae583dabkcut23gkr38obllokun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
