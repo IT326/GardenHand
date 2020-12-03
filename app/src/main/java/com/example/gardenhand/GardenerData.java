@@ -1,24 +1,28 @@
 package com.example.gardenhand;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class GardenerData {
-    List<Plant> wishList;
-    Garden garden;
-
-    public GardenerData() {
-        //pull from database
+    private ArrayList<Garden> gardens;
+    //ArrayList<Plant> wishlist;
+    public GardenerData(){
+       this.gardens = new ArrayList<Garden>();
+    }
+    public Garden getGarden(int index){
+        return gardens.get(index);
     }
 
-    List<Plant> getWishList() {
-        return wishList;
+    public ArrayList<Garden> getGardens(){
+        return gardens;
     }
 
-    Garden getGarden() {
-        return garden;
-    }
+    public int addGarden(Garden garden){
+        garden.setIndex(gardens.size());
+        this.gardens.add(garden);
+        return garden.listindex;
 
-    void deleteGarden() {
-        garden = null;
+    }
+    public void updateGarden(int index, Garden garden){
+        this.gardens.set(index,garden);
     }
 }

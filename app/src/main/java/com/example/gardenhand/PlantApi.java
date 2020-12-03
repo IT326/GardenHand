@@ -16,6 +16,7 @@ public class PlantApi {
    }
 
    public static void get(String url,RequestParams params, AsyncHttpResponseHandler responseHandler) {
+      responseHandler.setUseSynchronousMode(true);
       params.put("token",PLANTAPITOKEN);
       client.get(getAbsoluteUrl(url), params, responseHandler);
    }

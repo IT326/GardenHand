@@ -7,12 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
 import org.json.JSONException;
 
 public class FirstFragment extends Fragment {
@@ -23,24 +17,17 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        return inflater.inflate(R.layout.fragment_addplant, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_addplant).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PlantApiCaller apicall = new PlantApiCaller();
-                try {
-                    apicall.searchPlant();
 
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    }
+});
     }
 }

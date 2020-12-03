@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gardenhand.GardenManager;
+import com.example.gardenhand.Gardener;
 import com.example.gardenhand.MainActivity;
 import com.example.gardenhand.R;
 import com.example.gardenhand.ui.login.LoginViewModel;
@@ -27,95 +28,17 @@ import com.example.gardenhand.ui.login.LoginViewModelFactory;
 
 public class GardenerLogin extends AppCompatActivity {
 
-    private LoginViewModel loginViewModel;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gardener_login);
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        EditText usernameEditText = findViewById(R.id.username);
+        EditText passwordEditText = findViewById(R.id.password);
+        //Button loginButton = findViewById(R.id.login);
 
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
-            }
-        });
-
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
-            }
-        });
-
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
@@ -124,14 +47,38 @@ public class GardenerLogin extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-    }
 
-    public void loginButtonClick(View view){
+    //loginclick in MainActivity.java
+    public void loginButtonClick(View view) {
+        EditText usernameEditText= findViewById(R.id.username);
+        EditText passwordEditText= findViewById(R.id.password);
+        Button loginButton;
         //move to garden manager activity
-        Intent intent = new Intent(this, GardenManager.class);
-        startActivity(intent);
+        String user = "";
+        String pass = "";
+        user = usernameEditText.getText().toString().trim();
+        pass = passwordEditText.getText().toString().trim();
+        System.out.println("method passed through");
+        System.out.println(user);
+        System.out.println(pass);
+        if (user.equals("") || pass.equals("") || user.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "User or Pass wrong",Toast.LENGTH_SHORT).show();
+        } else {
+
+            //create gardener for now default
+            Gardener gardener = new Gardener(user, pass);
+            // or "sign in gardener" get gardener when make a sign in or create button
+
+            //pass Gardener in and open it in GardenManger class
+            Intent intent = new Intent(GardenerLogin.this, GardenManager.class);
+            //intent.putExtra("Gardener",gardener);
+            intent.putExtra("user", user);
+            intent.putExtra("pass", pass);
+            //gardener created when enter gardenManager
+            startActivity(intent);
+
+        }
+
 
     }
 }

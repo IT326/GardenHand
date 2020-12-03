@@ -1,29 +1,34 @@
 package com.example.gardenhand;
 
-public class Gardener {
-    GardenerCredentials credentials;
-    GardenerSocial socials;
-    GardenerData gardenerData;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-    public Gardener() {
-        credentials = new GardenerCredentials();
-        socials = new GardenerSocial();
-        gardenerData = new GardenerData();
-    }
+public class Gardener  {
+    private GardenerCredentials credentials;
+    //private com.example.gardenhand.GardenerSocial social;
+    private GardenerData data;
+    public int id;
 
-    void deleteGarden() {
+   public Gardener(String username, String password){
+       credentials = new GardenerCredentials(username,password);
+       data = new GardenerData();
+   }
 
-    }
+   public String getUsername(){
+       return credentials.getuserID();
+   }
+   public ArrayList<Garden> getGardens(){
+       return  data.getGardens();
+   }
+   public Garden getGarden(int index){
+       return data.getGarden(index);
+   }
+   public void updateGarden(Garden newG){
+       data.updateGarden(newG.listindex,newG);
+   }
+   //public String search(String search){}
+    //private deleteGarden(){}
 
-    GardenerCredentials getCredentials() {
-        return credentials;
-    }
 
-    GardenerSocial getSocials() {
-        return socials;
-    }
 
-    GardenerData getGardenerData() {
-        return gardenerData;
-    }
 }

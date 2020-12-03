@@ -1,5 +1,4 @@
 package com.example.gardenhand;
-
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -31,10 +30,6 @@ public class AddPlantActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab thistab) {
                 int position = thistab.getPosition();
-                switch(position){
-                    case 0:
-
-                }
             }
 
             @Override

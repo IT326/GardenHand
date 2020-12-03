@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import androidx.navigation.fragment.NavHostFragment;
 
-public class First2Fragment extends Fragment {
+public class Second6Fragment extends Fragment {
 
     @Override
     public View onCreateView(
@@ -18,17 +17,17 @@ public class First2Fragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first2, container, false);
+        return inflater.inflate(R.layout.fragment_second6, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(First2Fragment.this)
-                        .navigate(R.id.action_First2Fragment_to_Second2Fragment);
+                NavHostFragment.findNavController(Second6Fragment.this)
+                        .navigate(R.id.action_Second6Fragment_to_First5Fragment);
             }
         });
     }
