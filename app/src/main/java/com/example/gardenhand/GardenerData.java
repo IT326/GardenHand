@@ -6,6 +6,10 @@ public class GardenerData {
     List<Plant> wishList;
     Garden garden;
 
+    public GardenerData() {
+        //pull from database
+    }
+
     List<Plant> getWishList() {
         return wishList;
     }

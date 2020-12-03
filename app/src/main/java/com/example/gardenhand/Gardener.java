@@ -5,6 +5,12 @@ public class Gardener {
     GardenerSocial socials;
     GardenerData gardenerData;
 
+    public Gardener() {
+        credentials = new GardenerCredentials();
+        socials = new GardenerSocial();
+        gardenerData = new GardenerData();
+    }
+
     void deleteGarden() {
 
     }

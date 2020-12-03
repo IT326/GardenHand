@@ -6,7 +6,7 @@ public class GardenerCredentials {
     String userID;
     //String password
 
-    GardenerCredentials(String userID) {
-        
+    GardenerCredentials() {
+        //pull credentials from database
     }
 }

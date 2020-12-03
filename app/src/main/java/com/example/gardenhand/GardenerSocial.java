@@ -5,4 +5,8 @@ import java.util.List;
 public class GardenerSocial {
     List<Gardener> friendList;
     Plant featuredPlant;
+
+    public GardenerSocial() {
+        //pull from database
+    }
 }
