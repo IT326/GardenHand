@@ -61,6 +61,9 @@ public class Search {
         }
     }
 
+    //public void findVendor(final JSOCallback callback) {}
+
+    //public void findVendorutil(final JSOCallback callback) {}
 
     public void setJSONobj(JSONObject response){
         this.response = response;

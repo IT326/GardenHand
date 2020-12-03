@@ -28,7 +28,6 @@ public class PlantApiCaller {
     private static final String PLANTBASEAPI = "https://trefle.io/api/v1/plants";
     private static final String PLANTAPITOKEN = "A5x32nhndnuaaNfm5-avmytk5xEn_1X0o72WhP11Cq4";
     public JSONObject response = new JSONObject();
-    public Boolean wait = true;
 
 
     public void getPlant(String input, Context context, final JSOCallback callback) throws JSONException {
@@ -91,41 +90,6 @@ public class PlantApiCaller {
 
 
         queue.add(stringRequest);
-
-
-
-        //System.out.println(params.toString());
-        //String teststr = "?token=A5x32nhndnuaaNfm5-avmytk5xEn_1X0o72WhP11Cq4&q=tomato";
-       /* PlantApi.get(relurl, params, new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-                    results[0] = response;
-                    JSONArray resarray = (JSONArray) response.get("data");
-                    JSONObject resResult = (JSONObject) resarray.get(0);
-                    String plantName = resResult.getString("common_name");
-                    System.out.println(plantName);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-                System.out.println("got json object");
-
-
-            }
-
-
-
-        });
-
-        JSONArray resultarray = (JSONArray) results[0].get("data");
-        JSONObject resResult = (JSONObject) resultarray.get(0);
-        String plantName = resResult.getString("common_name");
-        System.out.println(plantName);*/
     }
 
     public void setJSONobj(JSONObject response){
