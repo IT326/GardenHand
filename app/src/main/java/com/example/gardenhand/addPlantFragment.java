@@ -49,7 +49,7 @@ public class addPlantFragment extends Fragment {
         plantList.add(new Plant("Garden asparagus","https://bs.floristic.org/image/o/673e603f2370b1eddb2e5ec28b0818b73e5a594e",108462));
         plantList.add(new Plant("Garden cucumber","https://bs.floristic.org/image/o/d278dfc3db5de3552484da316ab5925b75f1bea5",125316));
         plantList.add(new Plant("Garden rhubarb","https://bs.floristic.org/image/o/caff92d8413a0d92c7111165d8f14118395997a0",174243));
-        PlantListAdapter plAdapter = new PlantListAdapter(addPlantFragment.this.getContext(),plantList);
+        AddPlantListAdapter plAdapter = new AddPlantListAdapter(addPlantFragment.this.getContext(),plantList,getActivity().getIntent());
         listv.setAdapter(plAdapter);
 
 

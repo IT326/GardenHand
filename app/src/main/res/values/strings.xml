@@ -37,4 +37,6 @@
     <string name="title_activity_garden_view">GardenView</string>
     <string name="title_activity_search_view">SearchView</string>
     <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_add_garden">addGarden</string>
+    <string name="title_activity_plant_list_view">PlantListView</string>
 </resources>

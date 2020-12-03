@@ -7,8 +7,10 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 public class GardenManager extends AppCompatActivity {
+    Gardener user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +18,19 @@ public class GardenManager extends AppCompatActivity {
         setContentView(R.layout.activity_garden_manager);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        String user = (String) getIntent().getSerializableExtra("user");
+        String pass = (String) getIntent().getSerializableExtra("pass");
+
+        TextView textView = (TextView) toolbar.findViewById(R.id.usernametext);
+        textView.setText("Welcome! "+user+": Garden Manager");
+
+
+
+
+        Gardener gardener = new Gardener(user,pass);
+        this.user = gardener;
+        System.out.println(user);
 
 
     }
@@ -41,6 +56,7 @@ public class GardenManager extends AppCompatActivity {
     }
     public void yourGardenClick(View view){
         Intent intent = new Intent(this, GardenView.class);
+        intent.putExtra("GardensList",user.getGardens());
         startActivity(intent);
     }
 }

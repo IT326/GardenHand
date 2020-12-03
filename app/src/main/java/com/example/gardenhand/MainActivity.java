@@ -2,6 +2,8 @@ package com.example.gardenhand;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.gardenhand.ui.login.GardenerLogin;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,10 +57,36 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void loginButtonClick(View view){
+    public void loginButtonClick(View view) {
+        EditText usernameEditText= findViewById(R.id.username);
+        EditText passwordEditText= findViewById(R.id.password);
+        Button loginButton;
         //move to garden manager activity
-        Intent intent = new Intent(this, GardenManager.class);
-        startActivity(intent);
+        String user = "";
+        String pass = "";
+        user = usernameEditText.getText().toString().trim();
+        pass = passwordEditText.getText().toString().trim();
+        System.out.println("method passed through");
+        System.out.println(user);
+        System.out.println(pass);
+        if (user.equals("") || pass.equals("") || user.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "User or Pass wrong",Toast.LENGTH_SHORT).show();
+        } else {
+
+            //create gardener for now default
+            Gardener gardener = new Gardener(user, pass);
+            // or "sign in gardener" get gardener when make a sign in or create button
+
+            //pass Gardener in and open it in GardenManger class
+            Intent intent = new Intent(MainActivity.this, GardenManager.class);
+            //intent.putExtra("Gardener",gardener);
+            intent.putExtra("user", user);
+            intent.putExtra("pass", pass);
+            //gardener created when enter gardenManager
+            startActivity(intent);
+
+        }
+
 
     }
 

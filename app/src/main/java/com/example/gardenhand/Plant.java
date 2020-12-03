@@ -1,9 +1,11 @@
 package com.example.gardenhand;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Dictionary;
 
-public class Plant {
+public class Plant implements Serializable {
+    public Integer listIndex;
     String commonname;
     String photourl;
     //String id;

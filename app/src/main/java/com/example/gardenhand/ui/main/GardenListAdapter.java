@@ -1,6 +1,7 @@
-package com.example.gardenhand;
+package com.example.gardenhand.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,18 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import java.util.ArrayList;
+
+import com.example.gardenhand.Garden;
+import com.example.gardenhand.GardenView;
+import com.example.gardenhand.PlantListView;
+import com.example.gardenhand.R;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PlantListAdapter implements ListAdapter{
-    // make new addPlantListAdapter difference in onClick
-    ArrayList<Plant> arrayList;
+import java.util.ArrayList;
+
+public class GardenListAdapter implements ListAdapter{
+
+    ArrayList<Garden> arrayList;
     Context context;
-    public PlantListAdapter(Context context, ArrayList<Plant> arrayList) {
+    public GardenListAdapter(Context context, ArrayList<Garden> arrayList) {
         this.arrayList=arrayList;
         this.context=context;
     }
@@ -55,7 +61,7 @@ public class PlantListAdapter implements ListAdapter{
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Plant plant = arrayList.get(position);
+        final Garden garden = arrayList.get(position);
         //set onclick for row some how
         //onclick create search
         //retrieve plantby id
@@ -63,18 +69,25 @@ public class PlantListAdapter implements ListAdapter{
         //move to plantview page on succeess
         if(convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
-            convertView = layoutInflater.inflate(R.layout.plantlist_row, null);
+            convertView = layoutInflater.inflate(R.layout.gardenlist_row, null);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //go to plant view for plant
-                }
-            });
-            TextView tittle = convertView.findViewById(R.id.plantlist_name);
-            ImageView imag = convertView.findViewById(R.id.plantlist_image);
-            tittle.setText(plant.commonname);
+                    // System.out.println("touched "+garden.id);
+                    // go to plantlist view for garden
+                    Intent intent = new Intent(GardenListAdapter.this.context, PlantListView.class);
 
-            Picasso.with(context).load(plant.photourl).into(imag);
+
+
+                    intent.putExtra("plantList", garden.plantList);
+                    intent.putExtra("garden", garden);
+                    context.startActivity(intent);
+                }});
+            TextView tittle = convertView.findViewById(R.id.gardenlist_name);
+           TextView imag = convertView.findViewById(R.id.gardenlist_index);
+            tittle.setText(garden.name);
+            imag.setText(garden.listindex.toString());
+           // Picasso.with(context).load(garden.photourl).into(imag);
 
         }
         return convertView;
