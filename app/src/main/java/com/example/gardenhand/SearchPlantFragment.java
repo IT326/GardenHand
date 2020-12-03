@@ -71,7 +71,7 @@ public class SearchPlantFragment extends Fragment {
 
                                 // String plantName = result.getString("common_name");
 
-                                PlantListAdapter plAdapter = new PlantListAdapter(SearchPlantFragment.this.getContext(), plantList);
+                                AddPlantListAdapter plAdapter = new AddPlantListAdapter(SearchPlantFragment.this.getContext(), plantList,getActivity().getIntent());
                                 //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
                                 listv.setAdapter(plAdapter);
                                 //text.setVisibility(View.INVISIBLE);
