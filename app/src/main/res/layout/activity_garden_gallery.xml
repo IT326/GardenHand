@@ -38,8 +38,8 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <include
-        android:id="@+id/include2"
-        layout="content_gallery_view"
+        android:id="@+id/include"
+        layout="@layout/content_garden_gallery"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

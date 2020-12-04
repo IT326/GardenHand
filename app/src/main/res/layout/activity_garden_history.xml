@@ -27,7 +27,7 @@
 
     <include
         android:id="@+id/include2"
-        layout="content_plant_wish_list_view"
+        layout="@layout/content_garden_history"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
