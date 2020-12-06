@@ -46,6 +46,7 @@
             android:label="@string/title_activity_gardener_login" />
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTop"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -54,8 +55,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".NotificationBroadcast"/>
     </application>
-
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
