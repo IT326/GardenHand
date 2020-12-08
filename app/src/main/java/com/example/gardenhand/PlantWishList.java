@@ -12,16 +12,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlantWishList extends AppCompatActivity{
+    ListView lv;
     ArrayList<String> wantedPlants;
-
+    ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +34,22 @@ public class PlantWishList extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        wantedPlants = new ArrayList<>();
-        wantedPlants.add("tomato");
-        wantedPlants.add("pepper");
-        wantedPlants.add("corn");
+        lv = (ListView) findViewById(R.id.list_view);
 
+        // Instanciating an array list (you don't need to do this,
+        // you already have yours).
+        wantedPlants = new ArrayList<String>();
 
-        // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.WishListRecycle);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // This is the array adapter, it takes the context of the activity as a
+        // first parameter, the type of list view as a second parameter and your
+        // array as a third parameter.
+        arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                wantedPlants );
+
+        lv.setAdapter(arrayAdapter);
+
 
         FloatingActionButton fab = findViewById(R.id.addWishButton);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +75,8 @@ public class PlantWishList extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                wantedPlants.add(input.toString());
+                wantedPlants.add(input.getText().toString());
+                arrayAdapter.notifyDataSetChanged();
 
             }
         });

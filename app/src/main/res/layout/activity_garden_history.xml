@@ -25,6 +25,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+
     <include
         android:id="@+id/include2"
         layout="@layout/content_garden_history"
@@ -37,13 +43,6 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:layout_constraintVertical_bias="0.0" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/WishListRecycle"
-        android:layout_width="349dp"
-        android:layout_height="593dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="@+id/include2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
 
 </android.support.constraint.ConstraintLayout>
