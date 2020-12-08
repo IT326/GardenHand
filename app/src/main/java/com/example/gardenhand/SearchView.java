@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +35,8 @@ public class SearchView extends AppCompatActivity {
                     String searchURL = "https://www.amazon.com/s?url=search-alias%3Daps&field-keywords=";
 
                     String[] s = item.split("\\s+");
-                    searchURL.concat(TextUtils.join("+", s));
+                    searchURL = searchURL.concat(TextUtils.join("+", s));
+                    //Log.w("vendor", searchURL);
 
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(searchURL));
                     startActivity(browserIntent);
