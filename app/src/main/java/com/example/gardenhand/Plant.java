@@ -79,6 +79,12 @@ public class Plant implements Serializable {
         this.dbGardenID = dbGardenID;
     }
 
+    public void addToDatabase(String dbGardenID) {
+        this.dbGardenID = dbGardenID;
+
+        updateDB();
+    }
+
     private void updateDB() {//update database with new data
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> plantMap = new HashMap<String, Object>();
@@ -89,7 +95,7 @@ public class Plant implements Serializable {
         plantMap.put("plantHistory", plantHistory);
         plantMap.put("lastWater", lastWater);
 
-        db.collection("gardens/"+dbGardenID+"/plants").document(Integer.toString(id));
+        db.collection("gardens").document(dbGardenID).collection("plants").document(Integer.toString(id)).set(plantMap);
 
 
     }

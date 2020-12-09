@@ -37,13 +37,14 @@ public class Garden implements Serializable {
         this.plantList = new ArrayList<Plant>();
     }
 
-    public Garden(String name, DocumentReference ownerDocRef) {
+    public Garden(String name, String dbOwnerID) {
         this.name = name;
         //this.doors = outdoorindoor;
 
         this.plantList = new ArrayList<Plant>();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference ownerDocRef = db.collection("gardeners").document(dbOwnerID);
 
         Map<String, Object> gardenMap = new HashMap<String, Object>();
         gardenMap.put("owner", ownerDocRef);
@@ -97,6 +98,7 @@ public class Garden implements Serializable {
     public void addPlant(Plant nplant){
         nplant.listIndex = (this.plantList.size());
         this.plantList.add(nplant);
+        nplant.addToDatabase(name);
     }
 
     public void removePlant(int index){

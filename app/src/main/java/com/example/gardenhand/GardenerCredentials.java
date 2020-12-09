@@ -1,10 +1,11 @@
 package com.example.gardenhand;
 
+import java.io.Serializable;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GardenerCredentials {
+public class GardenerCredentials implements Serializable {
     String userID;
     String password;
 

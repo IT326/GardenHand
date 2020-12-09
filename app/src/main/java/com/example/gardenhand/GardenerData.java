@@ -10,12 +10,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.List;
 
-public class GardenerData {
+public class GardenerData implements Serializable {
     private ArrayList<Garden> gardens;
     //ArrayList<Plant> wishlist;
     public GardenerData(){
@@ -23,6 +24,7 @@ public class GardenerData {
     }
 
     public GardenerData(String dbUserID) {
+        gardens = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         DocumentReference docRef = db.collection("gardeners").document(dbUserID);
@@ -37,8 +39,10 @@ public class GardenerData {
 
                         List<DocumentReference> gardenRefs = (List<DocumentReference>) document.get("gardens");
 
-                        for(DocumentReference g : gardenRefs) {
-                            gardens.add(new Garden(g));
+                        if(gardenRefs != null) {
+                            for(DocumentReference g : gardenRefs) {
+                                gardens.add(new Garden(g));
+                            }
                         }
                     }
                     else {
