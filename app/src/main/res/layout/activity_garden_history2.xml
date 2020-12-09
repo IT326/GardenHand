@@ -24,7 +24,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ListView
-        android:id="@+id/plantList"
+        android:id="@+id/list_view"
         android:layout_width="380dp"
         android:layout_height="568dp"
         android:divider="#000"
