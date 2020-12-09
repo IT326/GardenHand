@@ -1,11 +1,21 @@
 package com.example.gardenhand;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.gardenhand.ui.login.GardenerLogin;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
@@ -15,12 +25,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gardener_login);
+        createNotificationChannels();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -56,10 +71,29 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    private void createNotificationChannels() {
+        // Create the NotificationChannels, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel plantChannel = new NotificationChannel("plant", getString(R.string.plant_channel), NotificationManager.IMPORTANCE_HIGH);
+            plantChannel.setDescription(getString(R.string.plant_channel_description));
+            plantChannel.setShowBadge(false);
+            NotificationChannel socialChannel = new NotificationChannel("social", getString(R.string.social_channel), NotificationManager.IMPORTANCE_DEFAULT);
+            socialChannel.setDescription(getString(R.string.plant_channel_description));
 
+            NotificationChannel miscChannel = new NotificationChannel("misc", getString(R.string.misc_channel), NotificationManager.IMPORTANCE_DEFAULT);
+            miscChannel.setDescription(getString(R.string.plant_channel_description));
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannels(Arrays.asList(plantChannel,socialChannel,miscChannel));
+        }
+    }
     public void loginButtonClick(View view) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         EditText usernameEditText= findViewById(R.id.username);
         EditText passwordEditText= findViewById(R.id.password);
+        Map<String, Object> usermap = new HashMap<>();
         Button loginButton;
         //move to garden manager activity
         String user = "";
@@ -72,6 +106,23 @@ public class MainActivity extends AppCompatActivity {
         if (user.equals("") || pass.equals("") || user.isEmpty() || pass.isEmpty()) {
             Toast.makeText(getApplicationContext(), "User or Pass wrong",Toast.LENGTH_SHORT).show();
         } else {
+            usermap.put("user",user);
+            usermap.put("pass",pass);
+
+            db.collection("gardeners").document(user).set(usermap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            System.out.println("user added");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            System.out.println("user failed");
+                            e.printStackTrace();
+                        }
+                    });
 
             //create gardener for now default
             Gardener gardener = new Gardener(user, pass);

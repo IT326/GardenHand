@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class PlantListView extends AppCompatActivity {
     ArrayList<Plant> plants;
     Garden garden;
+    Gardener gardener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +30,11 @@ public class PlantListView extends AppCompatActivity {
         plants = (ArrayList<Plant>) getIntent().getSerializableExtra("plantList");
         garden = (Garden) getIntent().getSerializableExtra("garden");
 
-
+        gardener = (Gardener) getIntent().getSerializableExtra("gardener");
 
 
         if (plants.size() >0) {
-           PlantListAdapter plAdapter = new PlantListAdapter(this, plants);
+           PlantListAdapter plAdapter = new PlantListAdapter(this, plants,this.getIntent());
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
             listv.setAdapter(plAdapter);
         }
@@ -58,7 +59,7 @@ public class PlantListView extends AppCompatActivity {
 
   ;
         if (plants.size() >0) {
-           PlantListAdapter plAdapter = new PlantListAdapter(this,plants);
+           PlantListAdapter plAdapter = new PlantListAdapter(this,plants,this.getIntent());
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
             listv.setAdapter(plAdapter);
         }
@@ -72,6 +73,14 @@ public class PlantListView extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        FloatingActionButton removefab = findViewById(R.id.removeGarden);
+        removefab.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View v) {
+                                             //gardener.removegardend
+                                         }
+                                     }
 
+        );
     }
 }

@@ -1,6 +1,7 @@
 package com.example.gardenhand;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,14 @@ import org.json.JSONObject;
 public class PlantListAdapter implements ListAdapter{
     // make new addPlantListAdapter difference in onClick
     ArrayList<Plant> arrayList;
+    Garden garden;
     Context context;
-    public PlantListAdapter(Context context, ArrayList<Plant> arrayList) {
+    Intent intent;
+    public PlantListAdapter(Context context, ArrayList<Plant> arrayList, Intent intent) {
         this.arrayList=arrayList;
         this.context=context;
+        this.intent = intent;
+        this.garden = (Garden) this.intent.getSerializableExtra("garden");
     }
     @Override
     public boolean areAllItemsEnabled() {
@@ -68,6 +73,11 @@ public class PlantListAdapter implements ListAdapter{
                 @Override
                 public void onClick(View v) {
                     //go to plant view for plant
+                    Intent intent = new Intent(PlantListAdapter.this.context, PlantView.class);
+                    intent.putExtra("garden", garden);
+                    intent.putExtra("plant", plant);
+                    context.startActivity(intent);
+
                 }
             });
             TextView tittle = convertView.findViewById(R.id.plantlist_name);

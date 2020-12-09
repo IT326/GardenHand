@@ -55,8 +55,11 @@ public class GardenManager extends AppCompatActivity {
         startActivity(intent);
     }
     public void yourGardenClick(View view){
+
+        //create list of gardens from garden references fromdb
         Intent intent = new Intent(this, GardenView.class);
         intent.putExtra("GardensList",user.getGardens());
+        intent.putExtra("Gardener",user);
         startActivity(intent);
     }
 }

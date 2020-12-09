@@ -39,6 +39,15 @@
     <string name="title_activity_setting">SettingActivity</string>
     <string name="title_activity_add_garden">addGarden</string>
     <string name="title_activity_plant_list_view">PlantListView</string>
-	<string name="vendor_edittext">Enter item to search</string>
-	<string name="vendor_button">Search</string>
+    <string name="vendor_edittext">Enter item to search</string>
+    <string name="vendor_button">Search</string>
+    <!-- Notification Strings -->
+    <string name="plant_channel">Plant Notifications</string>
+    <string name="plant_channel_description">Reminders and updates about the plants in your garden</string>
+    <string name="social_channel">Friend Notifications</string>
+    <string name="social_channel_description"> Notifications about comments and friends</string>
+    <string name="misc_channel">Other Notifications</string>
+    <string name="misc_channel_description">Other miscellaneous notifications</string>
+    <string name="search">Search</string>
+    <!-- End of Notification Strings -->
 </resources>
