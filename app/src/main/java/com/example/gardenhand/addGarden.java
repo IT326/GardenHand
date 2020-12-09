@@ -27,9 +27,9 @@ public class addGarden extends AppCompatActivity {
         setContentView(R.layout.activity_add_garden);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        gardensList = (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
         gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
+        gardensList = gardener.getGardens();
+
 
     }
 
@@ -44,11 +44,13 @@ public class addGarden extends AppCompatActivity {
 
             Garden newGarden = new Garden(name, gardener.getId());
             newGarden.setIndex(gardensList.size());
+            gardener.addGarden(newGarden);
             Intent intent = new Intent(this, GardenView.class);
 
 
-            gardensList.add(newGarden);
+
             intent.putExtra("GardensList", gardensList);
+            intent.putExtra("Gardener", gardener);
             startActivity(intent);
         }
     }

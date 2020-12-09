@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class PlantListView extends AppCompatActivity {
     ArrayList<Plant> plants;
+    ArrayList<Garden> gardenList;
     Garden garden;
     Gardener gardener;
     @Override
@@ -29,7 +30,7 @@ public class PlantListView extends AppCompatActivity {
 
         plants = (ArrayList<Plant>) getIntent().getSerializableExtra("plantList");
         garden = (Garden) getIntent().getSerializableExtra("garden");
-
+        gardenList = (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
         gardener = (Gardener) getIntent().getSerializableExtra("gardener");
 
 
@@ -79,9 +80,23 @@ public class PlantListView extends AppCompatActivity {
                                          @Override
                                          public void onClick(View v) {
                                              //gardener.removegardend
+                                             Intent intent = new Intent(PlantListView.this, GardenView.class);
+                                             //intent.putExtra("GardensList",gardenList);
+                                             gardener.deleteGarden(garden.listindex);
+                                             intent.putExtra("GardensList", gardener.getGardens());
+                                             intent.putExtra("Gardener",gardener);
+                                             startActivity(intent);
                                          }
                                      }
 
         );
     }
+    public void onBackPressed(){
+        //logout
+        Intent intent = new Intent(this, GardenView.class);
+        intent.putExtra("GardensList",gardener.getGardens());
+        intent.putExtra("Gardener",gardener);
+        startActivity(intent);
+    }
+
 }

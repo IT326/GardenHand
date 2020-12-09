@@ -24,10 +24,9 @@ public class Plant implements Serializable {
     //String id;
     int id;
     int daystowater;
-    //Plant seedParent = null;
+    Plant seedParent = null;
     private Dictionary<Date,Double> plantHistory;
     private Date lastWater;
-
     private String dbGardenID;
 
     public Plant(String name, String photourl, int id){
@@ -110,6 +109,10 @@ public class Plant implements Serializable {
     //updateWater(){
     // use current date to update last water
     // }
+
+    public void setPlantParent(Plant plant){
+        seedParent = plant;
+    }
 
     public String toString(){
         String outstr = "";

@@ -1,5 +1,6 @@
 package com.example.gardenhand;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.gardenhand.ui.login.GardenerLogin;
 import com.example.gardenhand.ui.main.GardenListAdapter;
 
 import java.util.ArrayList;
@@ -45,5 +47,12 @@ public class GardenList extends Fragment {
         listv.setAdapter(plAdapter);
 
 
+    }
+    public void onBackPressed(){
+        //logout
+        Intent intent = new Intent(getContext(), GardenManager.class);
+        //intent.putExtra("user","");
+      //  intent.putExtra("pass","");
+        startActivity(intent);
     }
 }

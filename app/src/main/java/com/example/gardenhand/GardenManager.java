@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.gardenhand.ui.login.GardenerLogin;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +41,14 @@ public class GardenManager extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed(){
+        //logout
+        Intent intent = new Intent(this, GardenerLogin.class);
+        intent.putExtra("user","");
+        intent.putExtra("pass","");
+        startActivity(intent);
+    }
 
     public void settingsButtonClick(View view){
         Intent intent = new Intent(this, SettingActivity.class);
@@ -63,9 +73,11 @@ public class GardenManager extends AppCompatActivity {
 
         //create list of gardens from garden references fromdb
         Intent intent = new Intent(this, GardenView.class);
-        intent.putExtra("GardensList",user.getGardens());
+       // intent.putExtra("GardensList",user.getGardens());
         intent.putExtra("Gardener",user);
         startActivity(intent);
+        //need to pass gardener then get gardens
+        //use update/remove gardensdown to plant list view level and probably further
     }
 
     public void historyButtonClick (View view){

@@ -81,7 +81,7 @@ public class GardenListAdapter implements ListAdapter{
                     Intent intent = new Intent(GardenListAdapter.this.context, PlantListView.class);
 
 
-
+                    intent.putExtra("GardensList",gardener.getGardens());
                     intent.putExtra("plantList", garden.plantList);
                     intent.putExtra("garden", garden);
                     intent.putExtra("gardener", gardener);

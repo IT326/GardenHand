@@ -70,6 +70,13 @@ public class GardenerData implements Serializable {
         return garden.listindex;
 
     }
+    public void removeGarden(int listindex){
+        this.gardens.remove(listindex);
+
+        for(int i =0; i< gardens.size();i++){
+            gardens.get(i).listindex=i;
+        }
+    }
     public void updateGarden(int index, Garden garden){
         this.gardens.set(index,garden);
     }
