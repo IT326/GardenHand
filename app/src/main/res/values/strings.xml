@@ -47,5 +47,6 @@
     <string name="social_channel_description"> Notifications about comments and friends</string>
     <string name="misc_channel">Other Notifications</string>
     <string name="misc_channel_description">Other miscellaneous notifications</string>
+    <string name="search">Search</string>
     <!-- End of Notification Strings -->
 </resources>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.gardenhand.Garden;
 import com.example.gardenhand.GardenView;
+import com.example.gardenhand.Gardener;
 import com.example.gardenhand.PlantListView;
 import com.example.gardenhand.R;
 import com.squareup.picasso.Picasso;
@@ -25,9 +26,11 @@ public class GardenListAdapter implements ListAdapter{
 
     ArrayList<Garden> arrayList;
     Context context;
-    public GardenListAdapter(Context context, ArrayList<Garden> arrayList) {
+    Gardener gardener;
+    public GardenListAdapter(Context context, ArrayList<Garden> arrayList, Gardener gardener) {
         this.arrayList=arrayList;
         this.context=context;
+        this.gardener=gardener;
     }
     @Override
     public boolean areAllItemsEnabled() {
@@ -81,6 +84,7 @@ public class GardenListAdapter implements ListAdapter{
 
                     intent.putExtra("plantList", garden.plantList);
                     intent.putExtra("garden", garden);
+                    intent.putExtra("gardener", gardener);
                     context.startActivity(intent);
                 }});
             TextView tittle = convertView.findViewById(R.id.gardenlist_name);

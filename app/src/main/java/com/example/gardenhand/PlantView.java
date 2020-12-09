@@ -1,64 +1,36 @@
 package com.example.gardenhand;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
+import com.squareup.picasso.Picasso;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PlantView#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PlantView extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PlantView() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PlantView.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PlantView newInstance(String param1, String param2) {
-        PlantView fragment = new PlantView();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+public class PlantView extends AppCompatActivity {
+    Garden garden;
+    Plant plant;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        ImageView image;
+        TextView name;
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        setContentView(R.layout.activity_plant_view);
+      plant = (Plant) this.getIntent().getSerializableExtra("plant");
+        garden = (Garden) this.getIntent().getSerializableExtra("garden");
+
+       image = findViewById(R.id.imgsrc);
+       name = findViewById(R.id.nametext);
+
+       name.setText(plant.commonname);
+
+        Picasso.with(this).load(plant.photourl).into(image);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plant_view, container, false);
-    }
+    public void removeButtonClick(View view) {}
+    public void compareButtonClick(View view) {}
+    public void familytrackButtonClick(View view) {}
 }

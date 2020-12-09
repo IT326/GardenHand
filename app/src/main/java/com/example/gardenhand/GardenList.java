@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class GardenList extends Fragment {
     ArrayList<Garden> gardens;
-
+    Gardener gardener;
 
 
 
@@ -37,10 +37,10 @@ public class GardenList extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final ListView listv = view.findViewById(R.id.gardenList);
-
+        gardener = (Gardener) getActivity().getIntent().getSerializableExtra("Gardener");
         gardens = (ArrayList<Garden>) getActivity().getIntent().getSerializableExtra("GardensList");
 
-        GardenListAdapter plAdapter = new GardenListAdapter(GardenList.this.getContext(), gardens);
+        GardenListAdapter plAdapter = new GardenListAdapter(GardenList.this.getContext(), gardens,gardener);
         //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
         listv.setAdapter(plAdapter);
 

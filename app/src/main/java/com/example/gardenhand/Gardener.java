@@ -3,7 +3,7 @@ package com.example.gardenhand;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Gardener  {
+public class Gardener implements Serializable  {
     private GardenerCredentials credentials;
     //private com.example.gardenhand.GardenerSocial social;
     private GardenerData data;
