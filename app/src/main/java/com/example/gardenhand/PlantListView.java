@@ -45,6 +45,7 @@ public class PlantListView extends AppCompatActivity {
                 Intent intent = new Intent(PlantListView.this, AddPlantActivity.class);
                 intent.putExtra("plantList",plants);
                 intent.putExtra("garden",garden);
+                intent.putExtra("gardener",gardener);
                 startActivity(intent);
             }
         });
