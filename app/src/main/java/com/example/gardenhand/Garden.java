@@ -16,7 +16,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Garden implements Serializable {
     public Integer listindex;
@@ -33,6 +35,20 @@ public class Garden implements Serializable {
         //this.doors = outdoorindoor;
 
         this.plantList = new ArrayList<Plant>();
+    }
+
+    public Garden(String name, DocumentReference ownerDocRef) {
+        this.name = name;
+        //this.doors = outdoorindoor;
+
+        this.plantList = new ArrayList<Plant>();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Map<String, Object> gardenMap = new HashMap<String, Object>();
+        gardenMap.put("owner", ownerDocRef);
+
+        db.collection("gardens").document(name).set(gardenMap);
     }
 
     public Garden(DocumentReference gardenRef) {//grab garden from database

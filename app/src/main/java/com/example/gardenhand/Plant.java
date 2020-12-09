@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,6 +35,16 @@ public class Plant implements Serializable {
         this.photourl = photourl;
         this.id = id;
 
+    }
+
+    public Plant(String name, String photourl, int id, String dbGardenID){
+        this.commonname = name;
+        this.photourl = photourl;
+        this.id = id;
+
+        this.dbGardenID = dbGardenID;
+
+        updateDB();
     }
 
     public Plant(String dbGardenID, String dbPlantID) {//pull plant from database
