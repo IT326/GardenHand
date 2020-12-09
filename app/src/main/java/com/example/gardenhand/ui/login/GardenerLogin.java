@@ -1,6 +1,8 @@
 package com.example.gardenhand.ui.login;
 
 import android.app.Activity;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
@@ -25,6 +27,12 @@ import com.example.gardenhand.MainActivity;
 import com.example.gardenhand.R;
 import com.example.gardenhand.ui.login.LoginViewModel;
 import com.example.gardenhand.ui.login.LoginViewModelFactory;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GardenerLogin extends AppCompatActivity {
 
@@ -50,8 +58,10 @@ public class GardenerLogin extends AppCompatActivity {
 
     //loginclick in MainActivity.java
     public void loginButtonClick(View view) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         EditText usernameEditText= findViewById(R.id.username);
         EditText passwordEditText= findViewById(R.id.password);
+        Map<String, Object> usermap = new HashMap<>();
         Button loginButton;
         //move to garden manager activity
         String user = "";
@@ -64,6 +74,24 @@ public class GardenerLogin extends AppCompatActivity {
         if (user.equals("") || pass.equals("") || user.isEmpty() || pass.isEmpty()) {
             Toast.makeText(getApplicationContext(), "User or Pass wrong",Toast.LENGTH_SHORT).show();
         } else {
+            usermap.put("user",user);
+            usermap.put("pass",pass);
+            //System.out.println(db.co);
+            db.collection("gardeners").document(user).set(usermap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            System.out.println("user added");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            System.out.println("user failed");
+                            e.printStackTrace();
+                            }
+                        });
+
 
             //create gardener for now default
             Gardener gardener = new Gardener(user, pass);
