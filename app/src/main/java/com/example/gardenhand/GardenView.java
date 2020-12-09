@@ -32,10 +32,8 @@ public class GardenView extends AppCompatActivity {
        gardenList= (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
         gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
 
-
-        gardenList = (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
-        if (gardenList.size() >0) {
-            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList,gardener);
+        if (gardenList != null && gardenList.size() >0) {
+            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList, gardener);
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
             listv.setAdapter(plAdapter);
         }
@@ -60,9 +58,9 @@ public class GardenView extends AppCompatActivity {
 
 
         gardenList = (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
-        System.out.println(gardenList.size());
-        if (gardenList.size() >0) {
-            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList,gardener);
+
+        if (gardenList != null && gardenList.size() >0) {
+            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList, gardener);
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
             listv.setAdapter(plAdapter);
         }
@@ -72,6 +70,7 @@ public class GardenView extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(GardenView.this, addGarden.class);
                 intent.putExtra("GardensList",gardenList);
+                intent.putExtra("Gardener",gardener);
                 startActivity(intent);
 
             }

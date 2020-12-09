@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class addGarden extends AppCompatActivity {
 
     ArrayList<Garden> gardensList;
+    Gardener gardener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class addGarden extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         gardensList = (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
+        gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
 
     }
 
@@ -40,7 +42,7 @@ public class addGarden extends AppCompatActivity {
             Toast.makeText(this,"no name entered",Toast.LENGTH_SHORT).show();
         }else {
 
-            Garden newGarden = new Garden(name);
+            Garden newGarden = new Garden(name, gardener.getId());
             newGarden.setIndex(gardensList.size());
             Intent intent = new Intent(this, GardenView.class);
 
