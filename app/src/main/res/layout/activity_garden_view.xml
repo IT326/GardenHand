@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".GardenView">
 
+    <TextView
+        android:id="@+id/featuredPlant"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="featured plant"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:onClick="featuredPlantClick"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 
     <Button
         android:id="@+id/historyButton"
@@ -28,7 +40,7 @@
         android:text="Garden Gallery"
         android:onClick="galleryButtonClick"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/featuredPlant" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

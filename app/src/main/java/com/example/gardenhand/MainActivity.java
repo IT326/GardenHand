@@ -1,5 +1,7 @@
 package com.example.gardenhand;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,8 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText uName;
+    EditText pword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gardener_login);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
        /* FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +58,49 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void loginButtonClick(View view){
-        //move to garden manager activity
+  /*  public void loginButtonClick(View view){
         Intent intent = new Intent(this, GardenManager.class);
         startActivity(intent);
+    }*/
 
+
+    public void loginButtonClick(View view){
+
+        uName = findViewById(R.id.username);
+        pword = findViewById(R.id.password);
+
+        String un = uName.getText().toString();
+        String pw = pword.getText().toString();
+
+        //move to garden manager activity
+        if(validate(un, pw))
+        {
+            Intent intent = new Intent(this, GardenManager.class);
+            startActivity(intent);
+        }
+
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Invalid Username or Password");
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+        }
+    }
+
+
+    private boolean validate(String user, String pass)
+    {
+        if(user.equals("username") && pass.equals("password"))
+            return true;
+        else
+            return false;
     }
 
 }
