@@ -1,8 +1,9 @@
 package com.example.gardenhand;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GardenerData {
+public class GardenerData implements Serializable {
     private ArrayList<Garden> gardens;
     //ArrayList<Plant> wishlist;
     public GardenerData(){

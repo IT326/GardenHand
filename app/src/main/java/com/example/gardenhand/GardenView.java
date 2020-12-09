@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class GardenView extends AppCompatActivity {
 
     ArrayList<Garden> gardenList;
+    Gardener gardener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +30,12 @@ public class GardenView extends AppCompatActivity {
         TextView textView = (TextView) toolbar.findViewById(R.id.usernametext);
         textView.setText("Gardens");
        gardenList= (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
-
+        gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
 
 
         gardenList = (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
         if (gardenList.size() >0) {
-            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList);
+            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList,gardener);
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
             listv.setAdapter(plAdapter);
         }
@@ -61,7 +62,7 @@ public class GardenView extends AppCompatActivity {
         gardenList = (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
         System.out.println(gardenList.size());
         if (gardenList.size() >0) {
-            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList);
+            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList,gardener);
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
             listv.setAdapter(plAdapter);
         }
