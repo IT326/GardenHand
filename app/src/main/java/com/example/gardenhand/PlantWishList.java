@@ -1,7 +1,9 @@
 package com.example.gardenhand;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -50,6 +53,13 @@ public class PlantWishList extends AppCompatActivity{
 
         lv.setAdapter(arrayAdapter);
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = (String) lv.getItemAtPosition(position);
+                popUpRemove(name);
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.addWishButton);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +86,29 @@ public class PlantWishList extends AppCompatActivity{
             public void onClick(DialogInterface dialog, int which) {
 
                 wantedPlants.add(input.getText().toString());
+                arrayAdapter.notifyDataSetChanged();
+
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
+
+    private void popUpRemove(String p) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Are you sure you want to remove from wish list?");
+        final String remove = p;
+        // Set up the buttons
+        builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                wantedPlants.remove(remove);
                 arrayAdapter.notifyDataSetChanged();
 
             }
