@@ -125,4 +125,44 @@
             android:id="@+id/action_Second6Fragment_to_First5Fragment"
             app:destination="@id/First5Fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/First8Fragment"
+        android:name="com.example.gardenhand.First8Fragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first8">
+
+        <action
+            android:id="@+id/action_First8Fragment_to_Second8Fragment"
+            app:destination="@id/Second8Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/Second8Fragment"
+        android:name="com.example.gardenhand.Second8Fragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second8">
+
+        <action
+            android:id="@+id/action_Second8Fragment_to_First8Fragment"
+            app:destination="@id/First8Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/First9Fragment"
+        android:name="com.example.gardenhand.First9Fragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first9">
+
+        <action
+            android:id="@+id/action_First9Fragment_to_Second9Fragment"
+            app:destination="@id/Second9Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/Second9Fragment"
+        android:name="com.example.gardenhand.Second9Fragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second9">
+
+        <action
+            android:id="@+id/action_Second9Fragment_to_First9Fragment"
+            app:destination="@id/First9Fragment" />
+    </fragment>
 </navigation>

@@ -7,6 +7,40 @@
     android:layout_height="match_parent"
     tools:context=".GardenManager">
 
+    <TextView
+        android:id="@+id/featuredPlant"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="featured plant"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:onClick="featuredPlantClick"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+    <Button
+        android:id="@+id/historyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="60dp"
+        android:onClick="historyButtonClick"
+        android:text="Garden History"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/friendsListButton" />
+
+    <Button
+        android:id="@+id/wishlistButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="96dp"
+        android:onClick="wishlistButtonClick"
+        android:text="Wish List"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyButton" />
 
 
     <Button
@@ -18,7 +52,7 @@
         android:text="@string/view_friends_list"
         android:onClick="friendsListClick"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/featuredPlant" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -57,9 +91,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
-        android:layout_marginTop="160dp"
-        android:text="@string/your_garden"
+        android:layout_marginTop="132dp"
         android:onClick="yourGardenClick"
+        android:text="@string/your_garden"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/friendsListButton" />
 
@@ -67,10 +101,10 @@
         android:id="@+id/findVendorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/find_vendors"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="92dp"
         android:onClick="searchButtonClick"
+        android:text="@string/find_vendors"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gardensButton" />
 

@@ -48,5 +48,7 @@
     <string name="misc_channel">Other Notifications</string>
     <string name="misc_channel_description">Other miscellaneous notifications</string>
     <string name="search">Search</string>
+    <string name="title_activity_garden_history">GardenHistory</string>
+    <string name="title_activity_plant_wish_list">PlantWishList</string>
     <!-- End of Notification Strings -->
 </resources>
