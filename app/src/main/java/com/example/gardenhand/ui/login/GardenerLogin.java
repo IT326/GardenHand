@@ -3,9 +3,16 @@ package com.example.gardenhand.ui.login;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -13,6 +20,8 @@ import  	androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -31,6 +40,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,26 +48,68 @@ public class GardenerLogin extends AppCompatActivity {
 
 
 
+    EditText uName;
+    EditText pword;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gardener_login);
+        createNotificationChannels();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        EditText usernameEditText = findViewById(R.id.username);
-        EditText passwordEditText = findViewById(R.id.password);
-        //Button loginButton = findViewById(R.id.login);
 
+       /* FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-    //loginclick in MainActivity.java
-    public void loginButtonClick(View view) {
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    private void createNotificationChannels() {
+        // Create the NotificationChannels, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel plantChannel = new NotificationChannel("plant", getString(R.string.plant_channel), NotificationManager.IMPORTANCE_HIGH);
+            plantChannel.setDescription(getString(R.string.plant_channel_description));
+            plantChannel.setShowBadge(false);
+            NotificationChannel socialChannel = new NotificationChannel("social", getString(R.string.social_channel), NotificationManager.IMPORTANCE_DEFAULT);
+            socialChannel.setDescription(getString(R.string.plant_channel_description));
+
+            NotificationChannel miscChannel = new NotificationChannel("misc", getString(R.string.misc_channel), NotificationManager.IMPORTANCE_DEFAULT);
+            miscChannel.setDescription(getString(R.string.plant_channel_description));
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannels(Arrays.asList(plantChannel,socialChannel,miscChannel));
+        }
+    }
+    public void signupButtonClick(View view) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         EditText usernameEditText= findViewById(R.id.username);
         EditText passwordEditText= findViewById(R.id.password);
@@ -76,7 +128,7 @@ public class GardenerLogin extends AppCompatActivity {
         } else {
             usermap.put("user",user);
             usermap.put("pass",pass);
-            //System.out.println(db.co);
+
             db.collection("gardeners").document(user).set(usermap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -89,9 +141,8 @@ public class GardenerLogin extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             System.out.println("user failed");
                             e.printStackTrace();
-                            }
-                        });
-
+                        }
+                    });
 
             //create gardener for now default
             Gardener gardener = new Gardener(user, pass);
@@ -106,7 +157,45 @@ public class GardenerLogin extends AppCompatActivity {
             startActivity(intent);
 
         }
-
-
     }
+
+    public void loginButtonClick(View view){
+
+        uName = findViewById(R.id.username);
+        pword = findViewById(R.id.password);
+
+        String un = uName.getText().toString();
+        String pw = pword.getText().toString();
+
+        //move to garden manager activity
+        if(validate(un, pw))
+        {
+            Intent intent = new Intent(this, GardenManager.class);
+            startActivity(intent);
+        }
+
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Invalid Username or Password");
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+        }
+    }
+
+
+    private boolean validate(String user, String pass)
+    {
+        if(user.equals("username") && pass.equals("password"))
+            return true;
+        else
+            return false;
+    }
+
 }

@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
@@ -30,6 +32,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText uName;
+    EditText pword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             notificationManager.createNotificationChannels(Arrays.asList(plantChannel,socialChannel,miscChannel));
         }
     }
-    public void loginButtonClick(View view) {
+    public void signupButtonClick(View view) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         EditText usernameEditText= findViewById(R.id.username);
         EditText passwordEditText= findViewById(R.id.password);
@@ -137,8 +142,46 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
-
-
     }
+
+    public void loginButtonClick(View view){
+
+        uName = findViewById(R.id.username);
+        pword = findViewById(R.id.password);
+
+        String un = uName.getText().toString();
+        String pw = pword.getText().toString();
+
+        //move to garden manager activity
+        if(validate(un, pw))
+        {
+            Intent intent = new Intent(this, GardenManager.class);
+            startActivity(intent);
+        }
+
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Invalid Username or Password");
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+        }
+    }
+
+
+    private boolean validate(String user, String pass)
+    {
+        if(user.equals("username") && pass.equals("password"))
+            return true;
+        else
+            return false;
+    }
+
 
 }

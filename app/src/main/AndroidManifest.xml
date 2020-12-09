@@ -10,9 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PlantWishList"
+            android:label="@string/title_activity_plant_wish_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".GardenHistory"
+            android:label="@string/title_activity_garden_history"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".PlantListView"
             android:label="@string/title_activity_plant_list_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".addGarden"
             android:label="@string/title_activity_add_garden"
@@ -45,19 +53,20 @@
             android:name=".ui.login.GardenerLogin"
             android:label="@string/title_activity_gardener_login"
             android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <receiver android:name=".NotificationBroadcast"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name=".NotificationBroadcast" />
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
