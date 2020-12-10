@@ -26,24 +26,24 @@ public class GardenManager extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        String user = (String) getIntent().getSerializableExtra("user");
-        String pass = (String) getIntent().getSerializableExtra("pass");
-
+       // String user = (String) getIntent().getSerializableExtra("user");
+       // String pass = (String) getIntent().getSerializableExtra("pass");
+        user = (Gardener) getIntent().getSerializableExtra("gardener");
         TextView textView = (TextView) toolbar.findViewById(R.id.usernametext);
-        textView.setText("Welcome! "+user+": Garden Manager");
+        textView.setText("Welcome! "+user.getUsername()+": Garden Manager");
 
 
-        Gardener gardener = new Gardener(user,pass);
-        this.user = gardener;
+       // Gardener gardener = new Gardener(user,pass);
+       // this.user = gardener;
         System.out.println(user);
 
         featuredP = findViewById(R.id.featuredPlant);
-        if(gardener.getFeaturedPlant().equals(""))
+        if(user.getFeaturedPlant().equals(""))
         {
             featuredP = findViewById(R.id.featuredPlant);
         }
         else
-            featuredP.setText(gardener.getFeaturedPlant());
+            featuredP.setText(user.getFeaturedPlant());
 
     }
     @Override
@@ -80,7 +80,7 @@ public class GardenManager extends AppCompatActivity {
         //create list of gardens from garden references fromdb
         Intent intent = new Intent(this, GardenView.class);
        // intent.putExtra("GardensList",user.getGardens());
-        intent.putExtra("Gardener",user);
+        intent.putExtra("gardener",user);
         startActivity(intent);
         //need to pass gardener then get gardens
         //use update/remove gardensdown to plant list view level and probably further

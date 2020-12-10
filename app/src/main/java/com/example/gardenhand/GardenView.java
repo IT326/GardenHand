@@ -30,8 +30,9 @@ public class GardenView extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         TextView textView = (TextView) toolbar.findViewById(R.id.usernametext);
         textView.setText("Gardens");
-        gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
+        gardener = (Gardener) getIntent().getSerializableExtra("gardener");
         gardenList= gardener.getGardens();
+
 
 
         if (gardenList != null && gardenList.size() >0) {
@@ -55,8 +56,9 @@ public class GardenView extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         final ListView listv = findViewById(R.id.gardenList);
-        gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
+        gardener = (Gardener) getIntent().getSerializableExtra("gardener");
         gardenList= gardener.getGardens();
+
 
         if (gardenList != null && gardenList.size() >0) {
             GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList, gardener);
@@ -69,7 +71,7 @@ public class GardenView extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(GardenView.this, addGarden.class);
                 intent.putExtra("GardensList",gardenList);
-                intent.putExtra("Gardener",gardener);
+                intent.putExtra("gardener",gardener);
                 startActivity(intent);
 
             }
@@ -80,7 +82,7 @@ public class GardenView extends AppCompatActivity {
         //logout
         Intent intent = new Intent(this, GardenManager.class);
         intent.putExtra("GardensList",gardenList);
-        intent.putExtra("Gardener",gardener);
+        intent.putExtra("gardener",gardener);
         startActivity(intent);
     }
 }

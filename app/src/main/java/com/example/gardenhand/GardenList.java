@@ -39,7 +39,7 @@ public class GardenList extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final ListView listv = view.findViewById(R.id.gardenList);
-        gardener = (Gardener) getActivity().getIntent().getSerializableExtra("Gardener");
+        gardener = (Gardener) getActivity().getIntent().getSerializableExtra("gardener");
         gardens = gardener.getGardens();
 
         GardenListAdapter plAdapter = new GardenListAdapter(GardenList.this.getContext(), gardener.getGardens(), gardener);

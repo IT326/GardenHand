@@ -30,7 +30,7 @@ public class addGarden extends AppCompatActivity {
         setContentView(R.layout.activity_add_garden);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
+        gardener = (Gardener) getIntent().getSerializableExtra("gardener");
         gardensList = gardener.getGardens();
 
 
@@ -53,7 +53,7 @@ public class addGarden extends AppCompatActivity {
 
 
             intent.putExtra("GardensList", gardensList);
-            intent.putExtra("Gardener", gardener);
+            intent.putExtra("gardener", gardener);
             startActivity(intent);
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();

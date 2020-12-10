@@ -12,7 +12,7 @@ public class Gardener implements Serializable  {
     private GardenerSocial social;
     private GardenerData data;
     public String id;
-    private GardenerSocial gs;
+    //private GardenerSocial gs;
 
    public Gardener(String username, String password){
        credentials = new GardenerCredentials(username,password);
@@ -21,6 +21,13 @@ public class Gardener implements Serializable  {
        social = new GardenerSocial();
        social.insert("");
    }
+    public Gardener(String username, String password,boolean bool){
+        credentials = new GardenerCredentials(username,password);
+        id = username;
+        data = new GardenerData(username);
+        social = new GardenerSocial();
+        social.insert("");
+    }
 
    public String getUsername(){
        return credentials.getuserID();
@@ -44,7 +51,7 @@ public class Gardener implements Serializable  {
     public void deleteGarden(int listindex){
        data.removeGarden(listindex);
     }
-   }
+
    //public String search(String search){}
    public void deleteGarden(String name) {
        data.deleteGarden(name);
@@ -59,6 +66,6 @@ public class Gardener implements Serializable  {
        data.addGarden(newG);
     }
 
-    public void setFeaturedPlant(String p){gs.setFeaturedPlant(p);}
-    public String getFeaturedPlant(){return gs.getFeaturedPlant();}
+    public void setFeaturedPlant(String p){social.setFeaturedPlant(p);}
+    public String getFeaturedPlant(){return social.getFeaturedPlant();}
 }

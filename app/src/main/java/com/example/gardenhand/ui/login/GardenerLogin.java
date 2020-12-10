@@ -162,6 +162,7 @@ public class GardenerLogin extends AppCompatActivity {
             //intent.putExtra("Gardener",gardener);
             intent.putExtra("user", user);
             intent.putExtra("pass", pass);
+            intent.putExtra("gardener",gardener);
             //gardener created when enter gardenManager
             startActivity(intent);
 
@@ -182,9 +183,11 @@ public class GardenerLogin extends AppCompatActivity {
             @Override
             public void onComplete(boolean result) {
                 if(result){
+                    Gardener gardener = new Gardener(un, pw);
                     Intent intent = new Intent(GardenerLogin.this, GardenManager.class);
-                    intent.putExtra("user", un);
-                    intent.putExtra("pass", pw);
+                    //intent.putExtra("user", un);
+                    //intent.putExtra("pass", pw);
+                    intent.putExtra("gardener",gardener);
                     startActivity(intent);
                 }else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GardenerLogin.this);

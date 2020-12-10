@@ -28,7 +28,11 @@ public class GardenerData implements Serializable {
         getGardensData(dbUserID, new GardenerDataCallback() {
             @Override
             public void onComplete(ArrayList<Garden> g) {
-                gardens = g;
+                if(g.size() == 0 || g == null){
+                    gardens = new ArrayList<Garden>();
+                }else {
+                    gardens = g;
+                }
                 Log.d("Garden_create", gardens.toString());
             }
         });

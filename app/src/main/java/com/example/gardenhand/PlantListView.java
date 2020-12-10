@@ -97,7 +97,7 @@ public class PlantListView extends AppCompatActivity {
                         System.out.println(garden.getName());
                         Intent intent = new Intent(PlantListView.this, GardenView.class);
                         intent.putExtra("GardensList", gardener.getGardens());
-                        intent.putExtra("Gardener",gardener);
+                        intent.putExtra("gardener",gardener);
                         startActivity(intent);
                     }
                 });
@@ -126,7 +126,7 @@ public class PlantListView extends AppCompatActivity {
         //logout
         Intent intent = new Intent(this, GardenView.class);
         intent.putExtra("GardensList",gardener.getGardens());
-        intent.putExtra("Gardener",gardener);
+        intent.putExtra("gardener",gardener);
         startActivity(intent);
     }
 
