@@ -178,6 +178,7 @@ public class GardenerLogin extends AppCompatActivity {
             public void onComplete(boolean result) {
                 if(result){
                     Gardener gardener = new Gardener(un, pw);
+                    //System.out.println(gardener.getGardens().size());
                     Intent intent = new Intent(GardenerLogin.this, GardenManager.class);
                     //intent.putExtra("user", un);
                     //intent.putExtra("pass", pw);

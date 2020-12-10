@@ -27,8 +27,7 @@ public class Second3Fragment extends Fragment {
         view.findViewById(R.id.button_searchplant).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Second3Fragment.this)
-                        .navigate(R.id.action_Second3Fragment_to_First3Fragment);
+                NavHostFragment.findNavController(Second3Fragment.this);
             }
         });
     }

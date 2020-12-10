@@ -26,8 +26,7 @@ public class First8Fragment extends Fragment {
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(First8Fragment.this)
-                        .navigate(R.id.action_First8Fragment_to_Second8Fragment);
+                NavHostFragment.findNavController(First8Fragment.this);
             }
         });
     }

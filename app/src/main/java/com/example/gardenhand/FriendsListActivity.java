@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.gardenhand.ui.login.GardenerLogin;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,5 +44,12 @@ public class FriendsListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed(){
+        //logout
+        Intent intent = new Intent(this, GardenManager.class);
+        intent.putExtra("gardener",gardener);
+        startActivity(intent);
+    }
 
 }

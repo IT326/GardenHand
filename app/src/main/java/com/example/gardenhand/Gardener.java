@@ -68,8 +68,6 @@ public class Gardener implements Serializable  {
 
     public void setFeaturedPlant(String p){social.setFeaturedPlant(p);}
     public String getFeaturedPlant(){return social.getFeaturedPlant();}
-    public void setFeaturedPlant(String p){gs.setFeaturedPlant(p);}
-    public String getFeaturedPlant(){return gs.getFeaturedPlant();}
 
     public void setWishlist(ArrayList<String> wl){data.wishlist = wl;}
     public ArrayList<String> getWishlist(){return data.wishlist;};

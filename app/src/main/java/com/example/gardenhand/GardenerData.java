@@ -34,16 +34,22 @@ public class GardenerData implements Serializable {
         getGardensData(dbUserID, new GardenerDataCallback() {
             @Override
             public void onComplete(ArrayList<Garden> g) {
+
+
+
                 if(g.size() == 0 || g == null){
-                    gardens = new ArrayList<Garden>();
+                    System.out.println("Empty gardens?: "+g.size());
+                    //gardens = g;
                 }else {
-                    gardens = g;
+                    System.out.println("gardens added: "+g.size());
+                   gardens = g;
                 }
                 Log.d("Garden_create", gardens.toString());
             }
         });
 
         //Log.d("Garden_create2", gardens.toString());
+        //System.out.println(gardens.size());
     }
 
     private void getGardensData(String dbUserID, final GardenerDataCallback callback) {
@@ -66,7 +72,8 @@ public class GardenerData implements Serializable {
                             for(int i=0; i<gardenRefs.size(); i++) {
                                 Garden newGarden = new Garden(gardenRefs.get(i), i);
 
-                                gardenArr.add(newGarden);
+                               gardenArr.add(newGarden);
+                                addGarden(newGarden);
                             }
                             Log.d("GardenerData", gardenArr.toString());
                         }
@@ -95,7 +102,8 @@ public class GardenerData implements Serializable {
     public int addGarden(Garden garden){
         int index = gardens.size();
         garden.setIndex(index);
-        this.gardens.add(garden);
+        gardens.add(garden);
+        System.out.println(gardens.size());
         return garden.listindex;
 
     }

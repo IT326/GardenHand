@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,9 +27,7 @@ public class First6Fragment extends Fragment {
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(First6Fragment.this)
-                        .navigate(R.id.action_First6Fragment_to_Second6Fragment);
-                        .navigate(R.id.action_First6Fragment_to_Second7Fragment);
+                NavHostFragment.findNavController(First6Fragment.this);
             }
         });
     }

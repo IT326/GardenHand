@@ -32,6 +32,7 @@ public class GardenView extends AppCompatActivity {
         textView.setText("Gardens");
         gardener = (Gardener) getIntent().getSerializableExtra("gardener");
         gardenList= gardener.getGardens();
+        System.out.println(gardenList.size());
 
 
 

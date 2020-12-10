@@ -27,8 +27,7 @@ public class First4Fragment extends Fragment {
         view.findViewById(R.id.button_addplant).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(First4Fragment.this)
-                        .navigate(R.id.action_First4Fragment_to_Second4Fragment);
+                NavHostFragment.findNavController(First4Fragment.this);
             }
         });
     }

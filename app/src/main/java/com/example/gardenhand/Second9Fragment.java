@@ -26,8 +26,7 @@ public class Second9Fragment extends Fragment {
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Second9Fragment.this)
-                        .navigate(R.id.action_Second9Fragment_to_First9Fragment);
+                NavHostFragment.findNavController(Second9Fragment.this);
             }
         });
     }

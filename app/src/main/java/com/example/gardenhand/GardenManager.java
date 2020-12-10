@@ -36,6 +36,7 @@ public class GardenManager extends AppCompatActivity {
        // Gardener gardener = new Gardener(user,pass);
        // this.user = gardener;
         System.out.println(user);
+        System.out.println(user.getGardens().size());
 
         featuredP = findViewById(R.id.featuredPlant);
         if(user.getFeaturedPlant().equals(""))
@@ -80,6 +81,7 @@ public class GardenManager extends AppCompatActivity {
         //create list of gardens from garden references fromdb
         Intent intent = new Intent(this, GardenView.class);
        // intent.putExtra("GardensList",user.getGardens());
+        System.out.println(user.getGardens().size());
         intent.putExtra("gardener",user);
         startActivity(intent);
         //need to pass gardener then get gardens
