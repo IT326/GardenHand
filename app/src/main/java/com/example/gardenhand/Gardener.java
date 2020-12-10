@@ -31,11 +31,12 @@ public class Gardener implements Serializable  {
        return credentials.getuserID();
    }
    //public String search(String search){}
-    public void deleteGarden(int listindex){
-       data.removeGarden(listindex);
-    }
+   public void deleteGarden(String name) {
+       data.deleteGarden(name);
+   }
+
     public void addGarden(Garden newG){
-       data.addGarden(newG);
+        data.addGarden(newG);
     }
 
 

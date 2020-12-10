@@ -80,4 +80,15 @@ public class GardenerData implements Serializable {
     public void updateGarden(int index, Garden garden){
         this.gardens.set(index,garden);
     }
+
+    public void deleteGarden(String name) {
+        for(Garden g : gardens) {
+            if(g.getName().equals(name)) {
+                gardens.remove(g);
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("gardens").document(name).delete();
+            }
+        }
+    }
 }

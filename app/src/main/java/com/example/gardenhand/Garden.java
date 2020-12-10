@@ -95,6 +95,10 @@ public class Garden implements Serializable {
         this.listindex = index;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void addPlant(Plant nplant){
         nplant.listIndex = (this.plantList.size());
         this.plantList.add(nplant);

@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -52,6 +55,10 @@ public class addGarden extends AppCompatActivity {
             intent.putExtra("GardensList", gardensList);
             intent.putExtra("Gardener", gardener);
             startActivity(intent);
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference gardenDoc = db.collection("gardens").document(name);
+            db.collection("gardeners").document(gardener.getId()).update("gardens", FieldValue.arrayUnion(gardenDoc));
         }
     }
 }

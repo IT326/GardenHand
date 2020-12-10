@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class PlantListView extends AppCompatActivity {
 
         plants = (ArrayList<Plant>) getIntent().getSerializableExtra("plantList");
         garden = (Garden) getIntent().getSerializableExtra("garden");
-        gardenList = gardener.getGardens();
+
         gardener = (Gardener) getIntent().getSerializableExtra("gardener");
 
 
@@ -78,38 +79,45 @@ public class PlantListView extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        FloatingActionButton removefab = findViewById(R.id.removeGarden);
-        removefab.setOnClickListener(new View.OnClickListener() {
-                                         @Override
-                                         public void onClick(View v) {
-                                             //gardener.removegardend
-                                             Intent intent = new Intent(PlantListView.this, GardenView.class);
-                                             //intent.putExtra("GardensList",gardenList);
-                                             new AlertDialog.Builder(PlantListView.this)
-                                                     .setTitle("Remove Garden")
-                                                     .setMessage("Do you really want to remove this garden?")
-                                                     .setIcon(android.R.drawable.ic_dialog_alert)
-                                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                                             Toast.makeText(PlantListView.this, "Removing", Toast.LENGTH_SHORT).show();
-                                                             //garden.removePlant(plant.listIndex);
-                                                             //garden.updateDB()
-                                                             Intent intent = new Intent(PlantListView.this, GardenView.class);
-                                                             gardener.deleteGarden(garden.listindex);
-                                                             intent.putExtra("GardensList", gardener.getGardens());
-                                                             intent.putExtra("Gardener",gardener);
-                                                             startActivity(intent);
 
 
-                                                         }})
-                                                     .setNegativeButton(android.R.string.no, null).show();
+
+        final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Are you sure you want to delete this garden?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        gardener.deleteGarden(garden.getName());
+                        System.out.println(garden.getName());
+                        Intent intent = new Intent(PlantListView.this, GardenView.class);
+                        intent.putExtra("GardensList", gardener.getGardens());
+                        intent.putExtra("Gardener",gardener);
+                        startActivity(intent);
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
 
 
-                                         }
-                                     }
+        FloatingActionButton deleteGardenfab = findViewById(R.id.removeGarden);
+        deleteGardenfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        );
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+        });
     }
     public void onBackPressed(){
         //logout
