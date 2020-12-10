@@ -113,6 +113,7 @@ public class Garden implements Serializable {
     }
 
     public void removePlant(int index){
+
         plantList.remove(index);
         for(int i =0; i< plantList.size();i++){
             plantList.get(i).listIndex=i;
