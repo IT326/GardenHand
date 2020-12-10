@@ -51,5 +51,6 @@
     <string name="search">Search</string>
     <string name="title_activity_garden_history">GardenHistory</string>
     <string name="title_activity_plant_wish_list">PlantWishList</string>
+    <string name="title_activity_garden_gallery">Garden Gallery</string>
     <!-- End of Notification Strings -->
 </resources>
