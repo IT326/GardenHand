@@ -58,7 +58,7 @@ public class Plant implements Serializable {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("Plant Firestore", "DocumentSnapshot data: " + document.getData());
+                        //Log.d("Plant Firestore", "DocumentSnapshot data: " + document.getData());
 
                         id = Integer.parseInt(document.getId());
                         commonname = (String) document.get("commonname");

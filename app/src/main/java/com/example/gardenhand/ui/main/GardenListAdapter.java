@@ -90,7 +90,7 @@ public class GardenListAdapter implements ListAdapter{
             TextView tittle = convertView.findViewById(R.id.gardenlist_name);
            TextView imag = convertView.findViewById(R.id.gardenlist_index);
             tittle.setText(garden.name);
-            imag.setText(garden.listindex.toString());
+            imag.setText(Integer.toString(garden.listindex));
            // Picasso.with(context).load(garden.photourl).into(imag);
 
         }

@@ -44,6 +44,7 @@ public class GardenView extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(GardenView.this, addGarden.class);
                 intent.putExtra("GardensList",gardenList);
+                intent.putExtra("Gardener", gardener);
                 startActivity(intent);
 
             }

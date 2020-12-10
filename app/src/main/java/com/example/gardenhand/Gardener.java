@@ -31,7 +31,9 @@ public class Gardener implements Serializable  {
        return credentials.getuserID();
    }
    //public String search(String search){}
-    //private deleteGarden(){}
+   public void deleteGarden(String name) {
+       data.deleteGarden(name);
+   }
 
 
 
