@@ -3,6 +3,8 @@ package com.example.gardenhand;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gardenhand.ui.login.GardenerLogin;
 import com.squareup.picasso.Picasso;
+
+import java.util.Date;
 
 public class PlantView extends AppCompatActivity {
     Garden garden;
@@ -21,6 +26,8 @@ public class PlantView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         ImageView image;
         TextView name;
+        TextView lastwater;
+        TextView createdate;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_view);
       plant = (Plant) this.getIntent().getSerializableExtra("plant");
@@ -30,6 +37,10 @@ public class PlantView extends AppCompatActivity {
        image = findViewById(R.id.imgsrc);
        name = findViewById(R.id.nametext);
        name.setText(plant.commonname);
+       lastwater = findViewById(R.id.lastwatertext);
+       lastwater.setText(plant.lastWater.toString());
+        createdate = findViewById(R.id.dateCreatedtext);
+        createdate.setText(plant.createDate.toString());
 
         Picasso.with(this).load(plant.photourl).into(image);
     }
@@ -57,6 +68,35 @@ public class PlantView extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, null).show();
 
     }
+
+    public void createNotification(View view){
+        plant.lastWater = new Date();
+        Intent intent=new Intent(this,NotificationBroadcast.class);
+        intent.putExtra("plant",plant);
+        intent.putExtra("garden",garden);
+        intent.putExtra("gardener",gardener);
+        intent.putExtra(NotificationBroadcast.TITLE,plant.commonname);
+        intent.putExtra(NotificationBroadcast.MESSAGE,"Time to water "+ plant.commonname);
+        intent.putExtra(NotificationBroadcast.CHANNEL,"plant");
+        intent.putExtra(NotificationBroadcast.ID,plant.id);
+        PendingIntent pendingIntent= PendingIntent.getBroadcast(this,0,intent,0);
+        AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
+        long timeNow=System.currentTimeMillis();
+        long offset=1000*plant.daystowater+1;
+        alarmManager.set(AlarmManager.RTC_WAKEUP,timeNow+offset,pendingIntent);
+    }
     public void compareButtonClick(View view) {}
     public void familytrackButtonClick(View view) {}
+
+    public void onBackPressed(){
+        //logout
+        garden.plantList.set(plant.listIndex,plant);
+        gardener.updateGarden(garden);
+        Intent intent = new Intent(this, PlantListView.class);
+        //intent.putExtra("plantList",garden.plantList);
+        intent.putExtra("garden",garden);
+        intent.putExtra("gardener",gardener);
+        startActivity(intent);
+    }
+
 }
