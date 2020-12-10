@@ -44,8 +44,8 @@ public class PlantView extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Toast.makeText(PlantView.this, "Removing", Toast.LENGTH_SHORT).show();
-                        //garden.removePlant(plant.listIndex);
-                        //garden.updateDB()
+                        garden.removePlant(plant.listIndex);
+                        gardener.updateGarden(garden);
                         Intent intent = new Intent(PlantView.this,PlantListView.class);
                         intent.putExtra("plantList",garden.plantList);
                         intent.putExtra("garden",garden);
