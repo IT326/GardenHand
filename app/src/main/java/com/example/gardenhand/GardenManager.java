@@ -32,13 +32,18 @@ public class GardenManager extends AppCompatActivity {
         TextView textView = (TextView) toolbar.findViewById(R.id.usernametext);
         textView.setText("Welcome! "+user+": Garden Manager");
 
-        featuredP = findViewById(R.id.featuredPlant);
-
 
         Gardener gardener = new Gardener(user,pass);
         this.user = gardener;
         System.out.println(user);
 
+        featuredP = findViewById(R.id.featuredPlant);
+        if(gardener.getFeaturedPlant().equals(""))
+        {
+            featuredP = findViewById(R.id.featuredPlant);
+        }
+        else
+            featuredP.setText(gardener.getFeaturedPlant());
 
     }
     @Override
@@ -91,8 +96,6 @@ public class GardenManager extends AppCompatActivity {
     }
 
     public void featuredPlantClick(View view) {
-
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Change Featured Plant");
 
@@ -108,6 +111,7 @@ public class GardenManager extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 featuredP.setText(input.getText().toString());
+                user.setFeaturedPlant(input.getText().toString());
 
             }
         });
