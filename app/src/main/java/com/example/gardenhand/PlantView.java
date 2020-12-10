@@ -42,11 +42,12 @@ public class PlantView extends AppCompatActivity {
         image = findViewById(R.id.imgsrc);
         name = findViewById(R.id.nametext);
         name.setText(plant.commonname);
+        /*
         lastwater = findViewById(R.id.lastwatertext);
         lastwater.setText(plant.lastWater.toString());
         createdate = findViewById(R.id.dateCreatedtext);
         createdate.setText(plant.createDate.toString());
-
+*/
         Picasso.with(this).load(plant.photourl).into(image);
     }
 
@@ -76,7 +77,7 @@ public class PlantView extends AppCompatActivity {
     }
 
     public void createNotification(View view){
-        plant.lastWater = new Date();
+        //plant.lastWater = new Date();
 
         Intent intent=new Intent(this,NotificationBroadcast.class);
         // intent.putExtra("plant",plant);

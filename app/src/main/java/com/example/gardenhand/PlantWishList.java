@@ -125,11 +125,11 @@ public class PlantWishList extends AppCompatActivity{
         });
         builder.show();
     }
-
+/*
     public void onBackPressed(){
         //logout
         Intent intent = new Intent(this, GardenManager.class);
         intent.putExtra("Gardener", user);
         startActivity(intent);
-    }
+    }*/
 }

@@ -52,10 +52,11 @@ public class GardenHistory extends AppCompatActivity {
 
     }
 
+    /*
     public void onBackPressed(){
         //logout
         Intent intent = new Intent(this, GardenManager.class);
         intent.putExtra("Gardener", user);
         startActivity(intent);
-    }
+    }*/
 }
