@@ -11,6 +11,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Dictionary;
@@ -125,5 +128,25 @@ public class Plant implements Serializable {
     }
     public void setPrecipitation(int maxprecip, int minprecip){
         daystowater=(maxprecip-minprecip)/200;
+    }
+
+    public JSONObject toJSONObject() {
+        JSONObject Jplant = new JSONObject();
+        JSONObject attributes = new JSONObject();
+
+        try {
+            attributes.put("photourl", photourl);
+            attributes.put("commonname", commonname);
+            attributes.put("daystowater", daystowater);
+            attributes.put("plantHistory", plantHistory);
+            attributes.put("lastWater", lastWater);
+
+            Jplant.put(Integer.toString(id), attributes);
+        }
+        catch(JSONException e) {
+            e.printStackTrace();
+        }
+
+        return Jplant;
     }
 }
