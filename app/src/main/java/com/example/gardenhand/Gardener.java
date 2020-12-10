@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Gardener implements Serializable  {
     private GardenerCredentials credentials;
-    //private com.example.gardenhand.GardenerSocial social;
+    private GardenerSocial social;
     private GardenerData data;
     public String id;
     private GardenerSocial gs;
@@ -18,7 +18,8 @@ public class Gardener implements Serializable  {
        credentials = new GardenerCredentials(username,password);
        id = username;
        data = new GardenerData(username);
-       gs = new GardenerSocial();
+       social = new GardenerSocial();
+       social.insert("");
    }
 
    public String getUsername(){
@@ -35,6 +36,14 @@ public class Gardener implements Serializable  {
    }
    public String getId() {
        return credentials.getuserID();
+    }
+    public GardenerSocial social() {
+       return social;
+    }
+
+    public void deleteGarden(int listindex){
+       data.removeGarden(listindex);
+    }
    }
    //public String search(String search){}
    public void deleteGarden(String name) {
@@ -47,7 +56,7 @@ public class Gardener implements Serializable  {
    }
 
     public void addGarden(Garden newG){
-        data.addGarden(newG);
+       data.addGarden(newG);
     }
 
     public void setFeaturedPlant(String p){gs.setFeaturedPlant(p);}

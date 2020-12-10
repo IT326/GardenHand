@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PlantView"></activity>
+        <activity
+            android:name=".AddFriendActivity"
+            android:label="@string/title_activity_add_friend"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".PlantView" />
         <activity
             android:name=".PlantWishList"
             android:label="@string/title_activity_plant_wish_list"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-        </intent-filter>
         </activity>
         <activity
             android:name=".GardenHistory"

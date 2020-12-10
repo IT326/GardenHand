@@ -51,5 +51,7 @@
     <string name="search">Search</string>
     <string name="title_activity_garden_history">GardenHistory</string>
     <string name="title_activity_plant_wish_list">PlantWishList</string>
+    <string name="title_activity_create_gardener_account">CreateGardenerAccount</string>
+    <string name="title_activity_add_friend">AddFriend</string>
     <!-- End of Notification Strings -->
 </resources>
