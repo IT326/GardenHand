@@ -22,6 +22,7 @@ public class AddPlantListAdapter implements ListAdapter{
     // make new addPlantListAdapter difference in onClick
     ArrayList<Plant> arrayList;
     Garden garden;
+    Gardener gardener;
     Context context;
     Intent intent;
     public AddPlantListAdapter(Context context, ArrayList<Plant> arrayList, Intent intent) {
@@ -29,6 +30,7 @@ public class AddPlantListAdapter implements ListAdapter{
         this.context=context;
         this.intent = intent;
         this.garden = (Garden) this.intent.getSerializableExtra("garden");
+        this.gardener = (Gardener) this.intent.getSerializableExtra("gardener");
         System.out.println(garden.name);
     }
     @Override
@@ -123,10 +125,11 @@ public class AddPlantListAdapter implements ListAdapter{
 
                     Intent intent = new Intent(AddPlantListAdapter.this.context, PlantListView.class);
 
-
+                   gardener.updateGarden(garden);
                     System.out.println(garden.plantList.size());
                     intent.putExtra("plantList", garden.plantList);
                     intent.putExtra("garden", garden);
+                    intent.putExtra("gardener", gardener);
                    // intent.putExtra("garden", garden);
                     context.startActivity(intent);
                 }

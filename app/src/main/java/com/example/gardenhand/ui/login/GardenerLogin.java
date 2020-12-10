@@ -160,14 +160,15 @@ public class GardenerLogin extends AppCompatActivity {
     }
 
     public void loginButtonClick(View view){
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         uName = findViewById(R.id.username);
         pword = findViewById(R.id.password);
-
+     //   System.out.println();
         String un = uName.getText().toString();
         String pw = pword.getText().toString();
 
         //move to garden manager activity
+        //
         if(validate(un, pw))
         {
             Intent intent = new Intent(this, GardenManager.class);

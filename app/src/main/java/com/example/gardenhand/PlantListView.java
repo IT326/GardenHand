@@ -32,12 +32,11 @@ public class PlantListView extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final ListView listv = findViewById(R.id.plantList);
 
-        plants = (ArrayList<Plant>) getIntent().getSerializableExtra("plantList");
-        garden = (Garden) getIntent().getSerializableExtra("garden");
-
         gardener = (Gardener) getIntent().getSerializableExtra("gardener");
-
-
+        gardenList = gardener.getGardens();
+        garden = (Garden) getIntent().getSerializableExtra("garden");
+        plants = garden.plantList;
+        System.out.println(gardener.getUsername());
         if (plants.size() >0) {
            PlantListAdapter plAdapter = new PlantListAdapter(this, plants,this.getIntent());
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
@@ -59,7 +58,10 @@ public class PlantListView extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         final ListView listv = findViewById(R.id.plantList);
-        plants = (ArrayList<Plant>) getIntent().getSerializableExtra("plantList");
+        gardener = (Gardener) getIntent().getSerializableExtra("gardener");
+        gardenList = gardener.getGardens();
+        garden = (Garden) getIntent().getSerializableExtra("garden");
+        plants = garden.plantList;
         System.out.println("Called");
 
 
@@ -76,6 +78,7 @@ public class PlantListView extends AppCompatActivity {
                 Intent intent = new Intent(PlantListView.this, AddPlantActivity.class);
                 intent.putExtra("plantList",plants);
                 intent.putExtra("garden",garden);
+                intent.putExtra("gardener",gardener);
                 startActivity(intent);
             }
         });

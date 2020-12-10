@@ -26,6 +26,7 @@ public class PlantView extends AppCompatActivity {
       plant = (Plant) this.getIntent().getSerializableExtra("plant");
         garden = (Garden) this.getIntent().getSerializableExtra("garden");
         gardener =(Gardener) this.getIntent().getSerializableExtra("gardener");
+        System.out.println(gardener.getUsername());
        image = findViewById(R.id.imgsrc);
        name = findViewById(R.id.nametext);
        name.setText(plant.commonname);

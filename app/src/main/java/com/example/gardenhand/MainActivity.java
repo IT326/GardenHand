@@ -77,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     private void createNotificationChannels() {
-        // Create the NotificationChannels, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
+        // Create the NotificationChannels, if on API 26+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel plantChannel = new NotificationChannel("plant", getString(R.string.plant_channel), NotificationManager.IMPORTANCE_HIGH);
             plantChannel.setDescription(getString(R.string.plant_channel_description));
@@ -88,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             NotificationChannel miscChannel = new NotificationChannel("misc", getString(R.string.misc_channel), NotificationManager.IMPORTANCE_DEFAULT);
             miscChannel.setDescription(getString(R.string.plant_channel_description));
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
+            // Register the channel with the system
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannels(Arrays.asList(plantChannel,socialChannel,miscChannel));
         }
