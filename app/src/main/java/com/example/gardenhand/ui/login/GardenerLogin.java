@@ -36,8 +36,12 @@ import com.example.gardenhand.MainActivity;
 import com.example.gardenhand.R;
 import com.example.gardenhand.ui.login.LoginViewModel;
 import com.example.gardenhand.ui.login.LoginViewModelFactory;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
@@ -190,12 +194,30 @@ public class GardenerLogin extends AppCompatActivity {
     }
 
 
-    private boolean validate(String user, String pass)
-    {
-        if(user.equals("username") && pass.equals("password"))
-            return true;
-        else
-            return false;
-    }
+    private boolean validate(String user, String pass) {
+        final boolean[] val = {};
+        final String u = user;
+        final String p = pass;
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("gardeners").document(user);
+        Task<DocumentSnapshot> documentSnapshotTask = docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String un = (String) document.get("user");
+                        String pw = (String) document.get("pass");
+                        if (un.equals(u) && pw.equals(p)) {
+                            val[0] = true;
+                        } else {
+                            val[0] = false;
+                        }
+                    }
 
+                }
+            }
+        });
+        return val[0];
+    }
 }
