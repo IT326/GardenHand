@@ -87,12 +87,15 @@ public class GardenManager extends AppCompatActivity {
 
     public void historyButtonClick (View view){
         Intent intent = new Intent(this, GardenHistory.class);
+        intent.putExtra("Gardener", user);
         startActivity(intent);
     }
 
     public void wishlistButtonClick (View view){
         Intent intent = new Intent(this, PlantWishList.class);
+        intent.putExtra("Gardener", user);
         startActivity(intent);
+
     }
 
     public void featuredPlantClick(View view) {

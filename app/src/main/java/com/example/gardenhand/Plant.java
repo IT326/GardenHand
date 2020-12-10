@@ -63,7 +63,7 @@ public class Plant implements Serializable {
                         commonname = (String) document.get("commonname");
                         photourl = (String) document.get("photourl");
                         plantHistory = (Dictionary) document.get("plantHistory");
-                        lastWater = (Date) document.get("lastWater");
+//                        lastWater = (Date) document.get("lastWater");
                     }
                     else {
                         Log.d("Plant Firestore", "No such document");

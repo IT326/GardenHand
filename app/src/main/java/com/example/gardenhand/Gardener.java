@@ -42,4 +42,11 @@ public class Gardener implements Serializable  {
 
     public void setFeaturedPlant(String p){gs.setFeaturedPlant(p);}
     public String getFeaturedPlant(){return gs.getFeaturedPlant();}
+
+    public void setWishlist(ArrayList<String> wl){data.wishlist = wl;}
+    public ArrayList<String> getWishlist(){return data.wishlist;};
+
+    public void setGardenHistory(ArrayList<String> gh){data.gardenHistory = gh;}
+    public ArrayList<String> getGardenHistory(){return data.gardenHistory;}
+    public ArrayList<String> addGardenHistory(String p){data.gardenHistory.add(p);return data.gardenHistory;};
 }

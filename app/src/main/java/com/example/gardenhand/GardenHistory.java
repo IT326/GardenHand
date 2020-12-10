@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class GardenHistory extends AppCompatActivity {
 
+    Gardener user;
     ListView lv;
     ArrayList<String> removedPlants;
     ArrayAdapter<String> arrayAdapter;
@@ -30,14 +31,14 @@ public class GardenHistory extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        user = (Gardener) getIntent().getSerializableExtra("Gardener");
+
         lv = (ListView) findViewById(R.id.list_view);
 
         // Instanciating an array list (you don't need to do this,
         // you already have yours).
         removedPlants = new ArrayList<String>();
-        removedPlants.add("tomato");
-        removedPlants.add("pepper");
-        removedPlants.add("potato");
+        removedPlants = user.getGardenHistory();
 
         // This is the array adapter, it takes the context of the activity as a
         // first parameter, the type of list view as a second parameter and your
@@ -49,5 +50,12 @@ public class GardenHistory extends AppCompatActivity {
 
         lv.setAdapter(arrayAdapter);
 
+    }
+
+    public void onBackPressed(){
+        //logout
+        Intent intent = new Intent(this, GardenManager.class);
+        intent.putExtra("Gardener", user);
+        startActivity(intent);
     }
 }
