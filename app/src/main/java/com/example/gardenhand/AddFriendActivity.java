@@ -1,5 +1,6 @@
 package com.example.gardenhand;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
 public class AddFriendActivity extends AppCompatActivity {
 
-    private ArrayList<String> friends;
-    private String nameToAdd;
+    private Gardener gardener;
+    private EditText nameBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +26,16 @@ public class AddFriendActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        friends = (ArrayList<String>) getIntent().getSerializableExtra("friends");
-
+        gardener = (Gardener) getIntent().getSerializableExtra("gardener");
     }
 
     public void addFriendButtonClicked(View view) {
-        nameToAdd = findViewById(R.id.textUsername).toString();
+        nameBox = findViewById(R.id.textUsername);
+        String nameToAdd = nameBox.getText().toString();
+        gardener.social().insert(nameToAdd);
 
-        if (friends.contains(nameToAdd)) {
-
-        }
-        else if (!nameToAdd.isEmpty()) {
-            friends.add(nameToAdd);
-        }
+        Intent intent = new Intent(this, FriendsListActivity.class);
+        intent.putExtra("gardener", gardener);
+        startActivity(intent);
     }
 }

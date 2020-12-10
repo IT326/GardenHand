@@ -30,13 +30,15 @@ public class FriendsListActivity extends AppCompatActivity {
 
         gardener = (Gardener) getIntent().getSerializableExtra("gardener");
         ListView listfriend = findViewById(R.id.friendlist);
-        friendadapter = new ArrayAdapter<String>(this, R.layout.activity_friends_list, gardener.social().getList());
+        friends = gardener.social().getList();
+        friendadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, gardener.social().getList());
         listfriend.setAdapter(friendadapter);
+
     }
 
     public void addButtonClick(View view) {
         Intent intent = new Intent(this, AddFriendActivity.class);
-        intent.putExtra("friends", friends);
+        intent.putExtra("gardener", gardener);
         startActivity(intent);
     }
 
