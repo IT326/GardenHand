@@ -12,6 +12,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -113,5 +117,25 @@ public class Garden implements Serializable {
         for(int i =0; i< plantList.size();i++){
             plantList.get(i).listIndex=i;
         }
+    }
+
+    public JSONObject toJSONObject() {//create json representation of garden
+        JSONObject Jgarden = new JSONObject();
+        JSONArray JplantArray = new JSONArray();
+
+
+        for(Plant p : plantList) {
+            JplantArray.put(p.toJSONObject());
+        }
+
+        try {
+            Jgarden.put("name", name);
+            Jgarden.put("plants", JplantArray);
+        }
+        catch(JSONException e) {
+            e.printStackTrace();
+        }
+
+        return Jgarden;
     }
 }
