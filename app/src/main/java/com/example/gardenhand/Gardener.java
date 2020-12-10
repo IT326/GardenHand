@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Gardener implements Serializable  {
     private GardenerCredentials credentials;
-    //private com.example.gardenhand.GardenerSocial social;
+    private GardenerSocial social;
     private GardenerData data;
     public String id;
 
@@ -13,6 +13,7 @@ public class Gardener implements Serializable  {
        credentials = new GardenerCredentials(username,password);
        id = username;
        data = new GardenerData(username);
+       social = new GardenerSocial();
    }
 
    public String getUsername(){

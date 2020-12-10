@@ -67,6 +67,7 @@ public class GardenManager extends AppCompatActivity {
 
     public void friendsListClick(View view){
         Intent intent = new Intent(this, FriendsListActivity.class);
+        intent.putExtra("gardener", user);
         startActivity(intent);
     }
     public void yourGardenClick(View view){

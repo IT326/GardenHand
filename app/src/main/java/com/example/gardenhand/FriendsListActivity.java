@@ -1,13 +1,25 @@
 package com.example.gardenhand;
 
+import android.content.Intent;
 import android.os.Bundle;
-import  com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FriendsListActivity extends AppCompatActivity {
+
+
+    private ArrayList<String> friends;
+    private Gardener gardener;
+    private ArrayAdapter<String> friendadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,13 +28,17 @@ public class FriendsListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.addFriendButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        friendadapter = new ArrayAdapter<String>(this, R.layout.activity_friends_list, friends.getList());
+        gardener = (Gardener) getIntent().getSerializableExtra("gardener");
+        ListView listfriend = findViewById(R.id.friendlist);
+        listfriend.setAdapter(friendadapter);
     }
+
+    public void addButtonClick(View view) {
+        Intent intent = new Intent(this, AddFriendActivity.class);
+        intent.putExtra("friends", friends);
+        startActivity(intent);
+    }
+
+
 }
