@@ -11,7 +11,6 @@ public class GardenerSocial implements Serializable {
 
 
     public GardenerSocial(){
-
        friendList = new ArrayList<String>();
     }
 

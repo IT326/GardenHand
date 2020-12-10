@@ -14,24 +14,28 @@ public class Gardener implements Serializable  {
        id = username;
        data = new GardenerData(username);
        social = new GardenerSocial();
+       social.insert("");
    }
 
-   public String getUsername(){
+    public String getUsername(){
        return credentials.getuserID();
-   }
-   public ArrayList<Garden> getGardens(){
+    }
+    public ArrayList<Garden> getGardens(){
        return  data.getGardens();
-   }
-   public Garden getGarden(int index){
+    }
+    public Garden getGarden(int index){
        return data.getGarden(index);
-   }
-   public void updateGarden(Garden newG){
+    }
+    public void updateGarden(Garden newG){
        data.updateGarden(newG.listindex,newG);
-   }
-   public String getId() {
+    }
+    public String getId() {
        return credentials.getuserID();
-   }
-   //public String search(String search){}
+    }
+    public GardenerSocial social() {
+       return social;
+    }
+
     public void deleteGarden(int listindex){
        data.removeGarden(listindex);
     }

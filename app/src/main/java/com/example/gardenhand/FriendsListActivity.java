@@ -28,9 +28,9 @@ public class FriendsListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        friendadapter = new ArrayAdapter<String>(this, R.layout.activity_friends_list, friends.getList());
         gardener = (Gardener) getIntent().getSerializableExtra("gardener");
         ListView listfriend = findViewById(R.id.friendlist);
+        friendadapter = new ArrayAdapter<String>(this, R.layout.activity_friends_list, gardener.social().getList());
         listfriend.setAdapter(friendadapter);
     }
 
