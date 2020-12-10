@@ -17,6 +17,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import  	androidx.appcompat.app.AppCompatActivity;
+
+import android.telecom.Call;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -30,6 +32,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gardenhand.DBCallback;
 import com.example.gardenhand.GardenManager;
 import com.example.gardenhand.Gardener;
 import com.example.gardenhand.MainActivity;
@@ -43,6 +46,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.json.JSONArray;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -168,36 +173,42 @@ public class GardenerLogin extends AppCompatActivity {
         uName = findViewById(R.id.username);
         pword = findViewById(R.id.password);
 
-        String un = uName.getText().toString();
-        String pw = pword.getText().toString();
+        final String un = uName.getText().toString();
+        final String pw = pword.getText().toString();
 
         //move to garden manager activity
-        if(validate(un, pw))
-        {
-            Intent intent = new Intent(this, GardenManager.class);
-            startActivity(intent);
-        }
+        final boolean valid;
+        validate(un,pw,new DBCallback(){
+            @Override
+            public void onComplete(boolean result) {
+                if(result){
+                    Intent intent = new Intent(GardenerLogin.this, GardenManager.class);
+                    intent.putExtra("user", un);
+                    intent.putExtra("pass", pw);
+                    startActivity(intent);
+                }else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GardenerLogin.this);
+                    builder.setTitle("Invalid Username or Password");
 
-        else
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Invalid Username or Password");
-
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
                 }
-            });
-            builder.show();
-        }
+            }
+        });
+
     }
 
 
-    private boolean validate(String user, String pass) {
-        final boolean[] val = {};
-        final String u = user;
-        final String p = pass;
+    private void validate(String user, String pass, final DBCallback callback) {
+        final boolean[] val = new boolean[1];
+        final String u = user.trim();
+        final String p = pass.trim();
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("gardeners").document(user);
         Task<DocumentSnapshot> documentSnapshotTask = docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -208,16 +219,21 @@ public class GardenerLogin extends AppCompatActivity {
                     if (document.exists()) {
                         String un = (String) document.get("user");
                         String pw = (String) document.get("pass");
-                        if (un.equals(u) && pw.equals(p)) {
+                        System.out.println(un+" "+ u);
+                        System.out.println(pw+" "+ p);
+
+                        if (un.trim().equals(u) && pw.trim().equals(p)) {
                             val[0] = true;
+
                         } else {
                             val[0] = false;
                         }
+                        callback.onComplete(val[0]);
                     }
 
                 }
             }
         });
-        return val[0];
+
     }
 }
