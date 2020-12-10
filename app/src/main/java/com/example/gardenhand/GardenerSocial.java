@@ -7,12 +7,13 @@ import java.util.ArrayList;
 
 public class GardenerSocial implements Serializable {
     //ArrayList friendList;
-   // Plant featuredPlant;
+    String featuredPlant;
 
 
     public GardenerSocial(){
 
        // friendList = new ArrayList<String>();
+        featuredPlant = "";
     }
 
     public boolean updateGarden(Plant newplant){
@@ -22,4 +23,7 @@ public class GardenerSocial implements Serializable {
         //return succ or fail
         return false;
     }
+
+    public void setFeaturedPlant(String p){featuredPlant = p;}
+    public String getFeaturedPlant(){return featuredPlant;}
 }

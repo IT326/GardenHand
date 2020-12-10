@@ -234,6 +234,5 @@ public class GardenerLogin extends AppCompatActivity {
                 }
             }
         });
-
     }
 }

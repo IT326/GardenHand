@@ -8,11 +8,13 @@ public class Gardener implements Serializable  {
     //private com.example.gardenhand.GardenerSocial social;
     private GardenerData data;
     public String id;
+    private GardenerSocial gs;
 
    public Gardener(String username, String password){
        credentials = new GardenerCredentials(username,password);
        id = username;
        data = new GardenerData(username);
+       gs = new GardenerSocial();
    }
 
    public String getUsername(){
@@ -38,5 +40,6 @@ public class Gardener implements Serializable  {
        data.addGarden(newG);
     }
 
-
+    public void setFeaturedPlant(String p){gs.setFeaturedPlant(p);}
+    public String getFeaturedPlant(){return gs.getFeaturedPlant();}
 }
