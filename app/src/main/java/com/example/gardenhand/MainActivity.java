@@ -10,10 +10,14 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.example.gardenhand.ui.login.GardenerLogin;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     private void createNotificationChannels() {
         // Create the NotificationChannels, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -91,13 +96,14 @@ public class MainActivity extends AppCompatActivity {
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannels(Arrays.asList(plantChannel,socialChannel,miscChannel));
+            notificationManager.createNotificationChannels(Arrays.asList(plantChannel, socialChannel, miscChannel));
         }
     }
+
     public void signupButtonClick(View view) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        EditText usernameEditText= findViewById(R.id.username);
-        EditText passwordEditText= findViewById(R.id.password);
+        EditText usernameEditText = findViewById(R.id.username);
+        EditText passwordEditText = findViewById(R.id.password);
         Map<String, Object> usermap = new HashMap<>();
         Button loginButton;
         //move to garden manager activity
@@ -109,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(user);
         System.out.println(pass);
         if (user.equals("") || pass.equals("") || user.isEmpty() || pass.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "User or Pass wrong",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "User or Pass wrong", Toast.LENGTH_SHORT).show();
         } else {
-            usermap.put("user",user);
-            usermap.put("pass",pass);
+            usermap.put("user", user);
+            usermap.put("pass", pass);
 
             db.collection("gardeners").document(user).set(usermap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -144,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void loginButtonClick(View view){
+    public void loginButtonClick(View view) {
 
         uName = findViewById(R.id.username);
         pword = findViewById(R.id.password);
@@ -153,16 +159,12 @@ public class MainActivity extends AppCompatActivity {
         String pw = pword.getText().toString();
 
         //move to garden manager activity
-        if(validate(un, pw))
-        {
+        if (validate(un, pw)) {
             Intent intent = new Intent(this, GardenManager.class);
             startActivity(intent);
-        }
-
-        else
-        {
+        } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Invalid Username or Password");
+            builder.setTitle("Invalid username or password");
 
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -175,13 +177,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private boolean validate(String user, String pass)
-    {
-        if(user.equals("username") && pass.equals("password"))
-            return true;
-        else
-            return false;
+    private boolean validate(String user, String pass) {
+        final boolean[] val = {};
+        final String u = user;
+        final String p = pass;
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("gardeners").document(user);
+        Task<DocumentSnapshot> documentSnapshotTask = docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String un = (String) document.get("user");
+                        String pw = (String) document.get("pass");
+                        if (un.equals(u) && pw.equals(p)) {
+                            val[0] = true;
+                        } else {
+                            val[0] = false;
+                        }
+                    }
+
+                }
+            }
+        });
+        return val[0];
     }
-
-
 }
