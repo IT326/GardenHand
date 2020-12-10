@@ -20,6 +20,7 @@ public class PlantListAdapter implements ListAdapter{
     // make new addPlantListAdapter difference in onClick
     ArrayList<Plant> arrayList;
     Garden garden;
+    Gardener gardener;
     Context context;
     Intent intent;
     public PlantListAdapter(Context context, ArrayList<Plant> arrayList, Intent intent) {
@@ -27,6 +28,7 @@ public class PlantListAdapter implements ListAdapter{
         this.context=context;
         this.intent = intent;
         this.garden = (Garden) this.intent.getSerializableExtra("garden");
+        this.gardener = (Gardener) this.intent.getSerializableExtra("gardener");
     }
     @Override
     public boolean areAllItemsEnabled() {
@@ -76,6 +78,7 @@ public class PlantListAdapter implements ListAdapter{
                     Intent intent = new Intent(PlantListAdapter.this.context, PlantView.class);
                     intent.putExtra("garden", garden);
                     intent.putExtra("plant", plant);
+                    intent.putExtra("gardener", gardener);
                     context.startActivity(intent);
 
                 }

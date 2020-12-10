@@ -57,4 +57,35 @@
         android:onClick="removeButtonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plantFamilybutton" />
+
+    <TextView
+        android:id="@+id/lastwatertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:text="Last watered"
+        app:layout_constraintStart_toEndOf="@+id/nametext"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dateCreatedtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:text="date Created"
+        app:layout_constraintStart_toEndOf="@+id/nametext"
+        app:layout_constraintTop_toBottomOf="@+id/lastwatertext" />
+
+    <Button
+        android:id="@+id/waterbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="192dp"
+        android:text="Water Plant"
+        android:onClick="createNotification"
+        app:layout_constraintStart_toEndOf="@+id/compareButton"
+        app:layout_constraintTop_toBottomOf="@+id/dateCreatedtext" />
 </androidx.constraintlayout.widget.ConstraintLayout>

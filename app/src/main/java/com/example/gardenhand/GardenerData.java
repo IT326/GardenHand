@@ -18,26 +18,33 @@ import java.util.List;
 
 public class GardenerData implements Serializable {
     private ArrayList<Garden> gardens;
-    ArrayList<String> wishlist;
-    ArrayList<String> gardenHistory;
+    //ArrayList<Plant> wishlist;
     public GardenerData(){
        this.gardens = new ArrayList<Garden>();
-       this.wishlist = new ArrayList<String>();
-       this.gardenHistory = new ArrayList<String>();
     }
 
     public GardenerData(String dbUserID) {
-        gardens = new ArrayList<>();
-        wishlist = new ArrayList<String>();
-        gardenHistory = new ArrayList<String>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        gardens = new ArrayList<Garden>();
+        getGardensData(dbUserID, new GardenerDataCallback() {
+            @Override
+            public void onComplete(ArrayList<Garden> g) {
+                gardens = g;
+                Log.d("Garden_create", gardens.toString());
+            }
+        });
 
+        //Log.d("Garden_create2", gardens.toString());
+    }
+
+    private void getGardensData(String dbUserID, final GardenerDataCallback callback) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("gardeners").document(dbUserID);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
+                    ArrayList<Garden> gardenArr = new ArrayList<Garden>();
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("GardenerData Firestore", "DocumentSnapshot data: " + document.getData());
@@ -45,14 +52,20 @@ public class GardenerData implements Serializable {
                         List<DocumentReference> gardenRefs = (List<DocumentReference>) document.get("gardens");
 
                         if(gardenRefs != null) {
-                            for(DocumentReference g : gardenRefs) {
-                                gardens.add(new Garden(g));
+                            //for(DocumentReference g : gardenRefs) {
+                            for(int i=0; i<gardenRefs.size(); i++) {
+                                Garden newGarden = new Garden(gardenRefs.get(i), i);
+
+                                gardenArr.add(newGarden);
                             }
+                            Log.d("GardenerData", gardenArr.toString());
                         }
+
                     }
                     else {
                         Log.d("GardenerData Firestore", "No such document");
                     }
+                    callback.onComplete(gardenArr);
                 }
                 else {
                     Log.d("GardenerData Firestore", "get failed with ", task.getException());
@@ -70,7 +83,8 @@ public class GardenerData implements Serializable {
     }
 
     public int addGarden(Garden garden){
-        garden.setIndex(gardens.size());
+        int index = gardens.size();
+        garden.setIndex(index);
         this.gardens.add(garden);
         return garden.listindex;
 
@@ -86,8 +100,14 @@ public class GardenerData implements Serializable {
         this.gardens.set(index,garden);
     }
 
-    public void setWishlist(ArrayList<String> wl){wishlist = wl;}
-    public ArrayList<String> getWishlist(){return wishlist;};
-    public void setHistory(ArrayList<String> gh){gardenHistory = gh;}
-    public ArrayList<String> getHistory(){return gardenHistory;};
+    public void deleteGarden(String name) {
+        for(Garden g : gardens) {
+            if(g.getName().equals(name)) {
+                gardens.remove(g);
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("gardens").document(name).delete();
+            }
+        }
+    }
 }

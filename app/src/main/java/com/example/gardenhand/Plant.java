@@ -26,13 +26,16 @@ public class Plant implements Serializable {
     int daystowater;
     Plant seedParent = null;
     private Dictionary<Date,Double> plantHistory;
-    private Date lastWater;
+    Date lastWater;
+    Date createDate;
     private String dbGardenID;
 
     public Plant(String name, String photourl, int id){
         this.commonname = name;
         this.photourl = photourl;
         this.id = id;
+        this.createDate = new Date();
+        this.lastWater = new Date();
 
     }
 
@@ -40,6 +43,8 @@ public class Plant implements Serializable {
         this.commonname = name;
         this.photourl = photourl;
         this.id = id;
+        this.createDate = new Date();
+        this.lastWater = new Date();
 
         this.dbGardenID = dbGardenID;
 
@@ -57,7 +62,7 @@ public class Plant implements Serializable {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("Plant Firestore", "DocumentSnapshot data: " + document.getData());
+                        //Log.d("Plant Firestore", "DocumentSnapshot data: " + document.getData());
 
                         id = Integer.parseInt(document.getId());
                         commonname = (String) document.get("commonname");

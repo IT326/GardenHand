@@ -35,19 +35,18 @@ public class PlantView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_view);
         createNotificationChannels();
-        plant = (Plant) this.getIntent().getSerializableExtra("plant");
+      plant = (Plant) this.getIntent().getSerializableExtra("plant");
         garden = (Garden) this.getIntent().getSerializableExtra("garden");
         gardener =(Gardener) this.getIntent().getSerializableExtra("gardener");
         System.out.println(gardener.getUsername());
-        image = findViewById(R.id.imgsrc);
-        name = findViewById(R.id.nametext);
-        name.setText(plant.commonname);
-        /*
-        lastwater = findViewById(R.id.lastwatertext);
-        lastwater.setText(plant.lastWater.toString());
+       image = findViewById(R.id.imgsrc);
+       name = findViewById(R.id.nametext);
+       name.setText(plant.commonname);
+       lastwater = findViewById(R.id.lastwatertext);
+       lastwater.setText(plant.lastWater.toString());
         createdate = findViewById(R.id.dateCreatedtext);
         createdate.setText(plant.createDate.toString());
-*/
+
         Picasso.with(this).load(plant.photourl).into(image);
     }
 
@@ -61,7 +60,6 @@ public class PlantView extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Toast.makeText(PlantView.this, "Removing", Toast.LENGTH_SHORT).show();
-                        gardener.addGardenHistory(plant.commonname);
                         garden.removePlant(plant.listIndex);
                         gardener.updateGarden(garden);
                         Intent intent = new Intent(PlantView.this,PlantListView.class);
@@ -77,12 +75,12 @@ public class PlantView extends AppCompatActivity {
     }
 
     public void createNotification(View view){
-        //plant.lastWater = new Date();
+        plant.lastWater = new Date();
 
         Intent intent=new Intent(this,NotificationBroadcast.class);
-        // intent.putExtra("plant",plant);
+       // intent.putExtra("plant",plant);
         //intent.putExtra("garden",garden);
-        // intent.putExtra("gardener",gardener);
+       // intent.putExtra("gardener",gardener);
         intent.putExtra(NotificationBroadcast.TITLE,plant.commonname);
         intent.putExtra(NotificationBroadcast.MESSAGE,"Time to water "+ plant.commonname);
         intent.putExtra(NotificationBroadcast.CHANNEL,"plant");

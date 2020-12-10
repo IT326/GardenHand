@@ -31,11 +31,11 @@ public class GardenView extends AppCompatActivity {
         TextView textView = (TextView) toolbar.findViewById(R.id.usernametext);
         textView.setText("Gardens");
         gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
-       gardenList= gardener.getGardens();
-        //gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
+        gardenList= gardener.getGardens();
+
 
         if (gardenList != null && gardenList.size() >0) {
-            GardenListAdapter plAdapter = new GardenListAdapter(this, gardener.getGardens(), gardener);
+            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList, gardener);
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
             listv.setAdapter(plAdapter);
         }
@@ -55,14 +55,11 @@ public class GardenView extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         final ListView listv = findViewById(R.id.gardenList);
-    //    gardenList= (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
-        System.out.println("Called");
-
-
-        gardenList =gardener.getGardens();
+        gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
+        gardenList= gardener.getGardens();
 
         if (gardenList != null && gardenList.size() >0) {
-            GardenListAdapter plAdapter = new GardenListAdapter(this, gardener.getGardens(), gardener);
+            GardenListAdapter plAdapter = new GardenListAdapter(this, gardenList, gardener);
             //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
             listv.setAdapter(plAdapter);
         }

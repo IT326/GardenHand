@@ -1,5 +1,9 @@
 package com.example.gardenhand;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -33,11 +37,17 @@ public class Gardener implements Serializable  {
        return credentials.getuserID();
    }
    //public String search(String search){}
-    public void deleteGarden(int listindex){
-       data.removeGarden(listindex);
-    }
+   public void deleteGarden(String name) {
+       data.deleteGarden(name);
+
+       FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+       DocumentReference docRef = db.collection("gardeners").document(id);
+       docRef.update("gardens", FieldValue.arrayRemove(db.collection("gardens").document(name)));
+   }
+
     public void addGarden(Garden newG){
-       data.addGarden(newG);
+        data.addGarden(newG);
     }
 
     public void setFeaturedPlant(String p){gs.setFeaturedPlant(p);}
