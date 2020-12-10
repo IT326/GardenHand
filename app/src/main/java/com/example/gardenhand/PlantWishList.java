@@ -1,31 +1,30 @@
 package com.example.gardenhand;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.example.gardenhand.ui.login.GardenerLogin;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+
 
 import java.util.ArrayList;
-import java.util.List;
+
+
+import java.util.ArrayList;
 
 public class PlantWishList extends AppCompatActivity{
+    Gardener user;
     ListView lv;
     ArrayList<String> wantedPlants;
     ArrayAdapter<String> arrayAdapter;
@@ -33,15 +32,18 @@ public class PlantWishList extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plant_wish_list);
+        setContentView(R.layout.activity_plant_wish_list2);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        user = (Gardener) getIntent().getSerializableExtra("Gardener");
+
+        wantedPlants = user.getWishlist();
 
         lv = (ListView) findViewById(R.id.list_view);
 
         // Instanciating an array list (you don't need to do this,
         // you already have yours).
-        wantedPlants = new ArrayList<String>();
 
         // This is the array adapter, it takes the context of the activity as a
         // first parameter, the type of list view as a second parameter and your
@@ -65,7 +67,7 @@ public class PlantWishList extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               popUpEditText();
+                popUpEditText();
             }
         });
     }
@@ -86,6 +88,7 @@ public class PlantWishList extends AppCompatActivity{
             public void onClick(DialogInterface dialog, int which) {
 
                 wantedPlants.add(input.getText().toString());
+                user.setWishlist(wantedPlants);
                 arrayAdapter.notifyDataSetChanged();
 
             }
@@ -109,6 +112,7 @@ public class PlantWishList extends AppCompatActivity{
             public void onClick(DialogInterface dialog, int which) {
 
                 wantedPlants.remove(remove);
+                user.setWishlist(wantedPlants);
                 arrayAdapter.notifyDataSetChanged();
 
             }
@@ -121,4 +125,11 @@ public class PlantWishList extends AppCompatActivity{
         });
         builder.show();
     }
+/*
+    public void onBackPressed(){
+        //logout
+        Intent intent = new Intent(this, GardenManager.class);
+        intent.putExtra("Gardener", user);
+        startActivity(intent);
+    }*/
 }

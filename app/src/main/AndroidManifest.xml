@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gardenhand">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PlantView"></activity>
+        <activity
+            android:name=".PlantWishList"
+            android:label="@string/title_activity_plant_wish_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".GardenHistory"
+            android:label="@string/title_activity_garden_history"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlantListView"
+            android:label="@string/title_activity_plant_list_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".addGarden"
+            android:label="@string/title_activity_add_garden"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlantWishList"
             android:label="@string/title_activity_plant_wish_list"
@@ -47,10 +66,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.login.GardenerLogin"
-            android:label="@string/title_activity_gardener_login" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_gardener_login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,6 +74,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver android:name=".NotificationBroadcast" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

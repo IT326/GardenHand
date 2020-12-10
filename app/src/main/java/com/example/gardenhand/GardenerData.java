@@ -1,0 +1,93 @@
+package com.example.gardenhand;
+
+import java.io.Serializable;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Dictionary;
+import java.util.List;
+
+public class GardenerData implements Serializable {
+    private ArrayList<Garden> gardens;
+    ArrayList<String> wishlist;
+    ArrayList<String> gardenHistory;
+    public GardenerData(){
+       this.gardens = new ArrayList<Garden>();
+       this.wishlist = new ArrayList<String>();
+       this.gardenHistory = new ArrayList<String>();
+    }
+
+    public GardenerData(String dbUserID) {
+        gardens = new ArrayList<>();
+        wishlist = new ArrayList<String>();
+        gardenHistory = new ArrayList<String>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference docRef = db.collection("gardeners").document(dbUserID);
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("GardenerData Firestore", "DocumentSnapshot data: " + document.getData());
+
+                        List<DocumentReference> gardenRefs = (List<DocumentReference>) document.get("gardens");
+
+                        if(gardenRefs != null) {
+                            for(DocumentReference g : gardenRefs) {
+                                gardens.add(new Garden(g));
+                            }
+                        }
+                    }
+                    else {
+                        Log.d("GardenerData Firestore", "No such document");
+                    }
+                }
+                else {
+                    Log.d("GardenerData Firestore", "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    public Garden getGarden(int index){
+        return gardens.get(index);
+    }
+
+    public ArrayList<Garden> getGardens(){
+        return gardens;
+    }
+
+    public int addGarden(Garden garden){
+        garden.setIndex(gardens.size());
+        this.gardens.add(garden);
+        return garden.listindex;
+
+    }
+    public void removeGarden(int listindex){
+        this.gardens.remove(listindex);
+
+        for(int i =0; i< gardens.size();i++){
+            gardens.get(i).listindex=i;
+        }
+    }
+    public void updateGarden(int index, Garden garden){
+        this.gardens.set(index,garden);
+    }
+
+    public void setWishlist(ArrayList<String> wl){wishlist = wl;}
+    public ArrayList<String> getWishlist(){return wishlist;};
+    public void setHistory(ArrayList<String> gh){gardenHistory = gh;}
+    public ArrayList<String> getHistory(){return gardenHistory;};
+}

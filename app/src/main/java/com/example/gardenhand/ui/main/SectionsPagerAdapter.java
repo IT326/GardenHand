@@ -1,14 +1,12 @@
 package com.example.gardenhand.ui.main;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.gardenhand.FirstFragment;
-import com.example.gardenhand.R;
 import com.example.gardenhand.SearchView;
 import com.example.gardenhand.SecondFragment;
 
@@ -24,7 +22,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     int totalTabs;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm,int totalTabs) {
+    public SectionsPagerAdapter(Context context, FragmentManager fm, int totalTabs) {
         super(fm);
         mContext = context;
         this.totalTabs = totalTabs;

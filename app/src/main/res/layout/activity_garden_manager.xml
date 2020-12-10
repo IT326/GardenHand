@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/GardenManagerLayout"
@@ -7,17 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".GardenManager">
 
+    <TextView
+        android:id="@+id/featuredPlant"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="featured plant"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:onClick="featuredPlantClick"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/historyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_marginStart="128dp"
         android:layout_marginTop="60dp"
-        android:onClick="addPlantButtonClick"
-        android:text="@string/add_plant"
+        android:onClick="historyButtonClick"
+        android:text="Garden History"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/friendsListButton" />
+
+    <Button
+        android:id="@+id/wishlistButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="96dp"
+        android:onClick="wishlistButtonClick"
+        android:text="Wish List"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyButton" />
+
 
     <Button
         android:id="@+id/friendsListButton"
@@ -28,9 +52,9 @@
         android:text="@string/view_friends_list"
         android:onClick="friendsListClick"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/featuredPlant" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -38,7 +62,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/AppTheme.PopupOverlay"/>
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+    <TextView
+        android:id="@+id/usernametext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:text="Garden Manager"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.432" />
+
+    </androidx.appcompat.widget.Toolbar>
+
 
 
 
@@ -53,9 +91,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
-        android:layout_marginTop="160dp"
-        android:text="@string/your_garden"
+        android:layout_marginTop="132dp"
         android:onClick="yourGardenClick"
+        android:text="@string/your_garden"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/friendsListButton" />
 
@@ -63,10 +101,10 @@
         android:id="@+id/findVendorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/find_vendors"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="92dp"
         android:onClick="searchButtonClick"
+        android:text="@string/find_vendors"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gardensButton" />
 
@@ -81,4 +119,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/findVendorButton" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

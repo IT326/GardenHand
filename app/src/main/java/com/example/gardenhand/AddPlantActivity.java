@@ -1,16 +1,10 @@
 package com.example.gardenhand;
-
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gardenhand.ui.main.SectionsPagerAdapter;
+import com.example.gardenhand.ui.main.PlantTabsPagerAdapter;
 
 public class AddPlantActivity extends AppCompatActivity {
     TabLayout tabs;
@@ -24,8 +18,8 @@ public class AddPlantActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
          tabs = (TabLayout) findViewById(R.id.tabs);
 
-        final SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(),tabs.getTabCount());
-        viewPager.setAdapter(sectionsPagerAdapter);
+        final PlantTabsPagerAdapter plantTabsPagerAdapter = new PlantTabsPagerAdapter(this, getSupportFragmentManager(),tabs.getTabCount());
+        viewPager.setAdapter(plantTabsPagerAdapter);
         tabs.setupWithViewPager(viewPager);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
@@ -36,10 +30,6 @@ public class AddPlantActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab thistab) {
                 int position = thistab.getPosition();
-                switch(position){
-                    case 0:
-
-                }
             }
 
             @Override

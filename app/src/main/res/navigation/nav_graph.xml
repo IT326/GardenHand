@@ -9,7 +9,7 @@
         android:id="@+id/FirstFragment"
         android:name="com.example.gardenhand.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_addplant">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/First2Fragment"
-        android:name="com.example.gardenhand.First2Fragment"
+        android:name="com.example.gardenhand.addPlantFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first2">
 
@@ -37,9 +37,9 @@
     </fragment>
     <fragment
         android:id="@+id/Second2Fragment"
-        android:name="com.example.gardenhand.Second2Fragment"
+        android:name="com.example.gardenhand.SearchPlantFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second2">
+        tools:layout="@layout/fragment_searchplant">
 
         <action
             android:id="@+id/action_Second2Fragment_to_First2Fragment"
@@ -86,13 +86,13 @@
             app:destination="@id/First4Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/First5Fragment"
-        android:name="com.example.gardenhand.First5Fragment"
+        android:id="@+id/FirstFragment"
+        android:name="com.example.gardenhand.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first5">
+        tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_First5Fragment_to_Second5Fragment"
+            android:id="@+id/action_FirstFragment_to_Second5Fragment"
             app:destination="@id/Second5Fragment" />
     </fragment>
     <fragment
@@ -102,17 +102,17 @@
         tools:layout="@layout/fragment_second5">
 
         <action
-            android:id="@+id/action_Second5Fragment_to_First5Fragment"
-            app:destination="@id/First5Fragment" />
+            android:id="@+id/action_Second5Fragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
-        android:id="@+id/First6Fragment"
-        android:name="com.example.gardenhand.First6Fragment"
+        android:id="@+id/First5Fragment"
+        android:name="com.example.gardenhand.First5Fragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first6">
+        tools:layout="@layout/fragment_first5">
 
         <action
-            android:id="@+id/action_First6Fragment_to_Second6Fragment"
+            android:id="@+id/action_First5Fragment_to_Second6Fragment"
             app:destination="@id/Second6Fragment" />
     </fragment>
     <fragment
@@ -122,27 +122,47 @@
         tools:layout="@layout/fragment_second6">
 
         <action
-            android:id="@+id/action_Second6Fragment_to_First6Fragment"
-            app:destination="@id/First6Fragment" />
+            android:id="@+id/action_Second6Fragment_to_First5Fragment"
+            app:destination="@id/First5Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/First7Fragment"
-        android:name="com.example.gardenhand.First7Fragment"
+        android:id="@+id/First8Fragment"
+        android:name="com.example.gardenhand.First8Fragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first7">
+        tools:layout="@layout/fragment_first8">
 
         <action
-            android:id="@+id/action_First7Fragment_to_Second7Fragment"
-            app:destination="@id/Second7Fragment" />
+            android:id="@+id/action_First8Fragment_to_Second8Fragment"
+            app:destination="@id/Second8Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/Second7Fragment"
-        android:name="com.example.gardenhand.Second7Fragment"
+        android:id="@+id/Second8Fragment"
+        android:name="com.example.gardenhand.Second8Fragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second7">
+        tools:layout="@layout/fragment_second8">
 
         <action
-            android:id="@+id/action_Second7Fragment_to_First7Fragment"
-            app:destination="@id/First7Fragment" />
+            android:id="@+id/action_Second8Fragment_to_First8Fragment"
+            app:destination="@id/First8Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/First9Fragment"
+        android:name="com.example.gardenhand.First9Fragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first9">
+
+        <action
+            android:id="@+id/action_First9Fragment_to_Second9Fragment"
+            app:destination="@id/Second9Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/Second9Fragment"
+        android:name="com.example.gardenhand.Second9Fragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second9">
+
+        <action
+            android:id="@+id/action_Second9Fragment_to_First9Fragment"
+            app:destination="@id/First9Fragment" />
     </fragment>
 </navigation>

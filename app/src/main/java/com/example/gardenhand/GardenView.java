@@ -1,74 +1,89 @@
 package com.example.gardenhand;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import com.example.gardenhand.ui.login.GardenerLogin;
+import com.example.gardenhand.ui.main.GardenListAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class GardenView extends AppCompatActivity {
 
-    TextView featuredP;
+    ArrayList<Garden> gardenList;
+    Gardener gardener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
+       final ListView listv = findViewById(R.id.gardenList);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        TextView textView = (TextView) toolbar.findViewById(R.id.usernametext);
+        textView.setText("Gardens");
+        gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
+       gardenList= gardener.getGardens();
+        //gardener = (Gardener) getIntent().getSerializableExtra("Gardener");
 
-        featuredP = findViewById(R.id.featuredPlant);
-    }
-
-    public void galleryButtonClick (View view){
-        Intent intent = new Intent(this, GardenGallery.class);
-        startActivity(intent);
-    }
-
-    public void historyButtonClick (View view){
-        Intent intent = new Intent(this, GardenHistory.class);
-        startActivity(intent);
-    }
-
-    public void wishlistButtonClick (View view){
-        Intent intent = new Intent(this, PlantWishList.class);
-        startActivity(intent);
-    }
-
-    public void featuredPlantClick(View view) {
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Change Featured Plant");
-
-        final EditText input = new EditText(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        builder.setView(input);
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        if (gardenList != null && gardenList.size() >0) {
+            GardenListAdapter plAdapter = new GardenListAdapter(this, gardener.getGardens(), gardener);
+            //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
+            listv.setAdapter(plAdapter);
+        }
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                featuredP.setText(input.getText().toString());
+            public void onClick(View view) {
+                Intent intent = new Intent(GardenView.this, addGarden.class);
+                intent.putExtra("GardensList",gardener.getGardens());
+                startActivity(intent);
 
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final ListView listv = findViewById(R.id.gardenList);
+    //    gardenList= (ArrayList<Garden>) getIntent().getSerializableExtra("GardensList");
+        System.out.println("Called");
+
+
+        gardenList =gardener.getGardens();
+
+        if (gardenList != null && gardenList.size() >0) {
+            GardenListAdapter plAdapter = new GardenListAdapter(this, gardener.getGardens(), gardener);
+            //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
+            listv.setAdapter(plAdapter);
+        }
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+            public void onClick(View view) {
+                Intent intent = new Intent(GardenView.this, addGarden.class);
+                intent.putExtra("GardensList",gardenList);
+                intent.putExtra("Gardener",gardener);
+                startActivity(intent);
+
             }
         });
-        builder.show();
+
+    }
+    public void onBackPressed(){
+        //logout
+        Intent intent = new Intent(this, GardenManager.class);
+        intent.putExtra("GardensList",gardenList);
+        intent.putExtra("Gardener",gardener);
+        startActivity(intent);
     }
 }

@@ -5,9 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class First5Fragment extends Fragment {
@@ -28,7 +27,7 @@ public class First5Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(First5Fragment.this)
-                        .navigate(R.id.action_First5Fragment_to_Second5Fragment);
+                        .navigate(R.id.action_First5Fragment_to_Second6Fragment);
             }
         });
     }
