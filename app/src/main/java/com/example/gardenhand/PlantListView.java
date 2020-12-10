@@ -31,11 +31,10 @@ public class PlantListView extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final ListView listv = findViewById(R.id.plantList);
 
-        plants = (ArrayList<Plant>) getIntent().getSerializableExtra("plantList");
-        garden = (Garden) getIntent().getSerializableExtra("garden");
-        gardenList = gardener.getGardens();
         gardener = (Gardener) getIntent().getSerializableExtra("gardener");
-
+        gardenList = gardener.getGardens();
+        garden = (Garden) getIntent().getSerializableExtra("garden");
+        plants = garden.plantList;
 
         if (plants.size() >0) {
            PlantListAdapter plAdapter = new PlantListAdapter(this, plants,this.getIntent());
