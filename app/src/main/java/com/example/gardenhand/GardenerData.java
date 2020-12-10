@@ -18,13 +18,19 @@ import java.util.List;
 
 public class GardenerData implements Serializable {
     private ArrayList<Garden> gardens;
-    //ArrayList<Plant> wishlist;
+    ArrayList<String> wishlist;
+    ArrayList<String> gardenHistory;
     public GardenerData(){
-       this.gardens = new ArrayList<Garden>();
+
+        this.gardens = new ArrayList<Garden>();
+        this.wishlist = new ArrayList<String>();
+        this.gardenHistory = new ArrayList<String>();
     }
 
     public GardenerData(String dbUserID) {
         gardens = new ArrayList<Garden>();
+        wishlist = new ArrayList<String>();
+        gardenHistory = new ArrayList<String>();
         getGardensData(dbUserID, new GardenerDataCallback() {
             @Override
             public void onComplete(ArrayList<Garden> g) {
@@ -110,4 +116,9 @@ public class GardenerData implements Serializable {
             }
         }
     }
+
+    public void setWishlist(ArrayList<String> wl){wishlist = wl;}
+    public ArrayList<String> getWishlist(){return wishlist;};
+    public void setHistory(ArrayList<String> gh){gardenHistory = gh;}
+    public ArrayList<String> getHistory(){return gardenHistory;};
 }
