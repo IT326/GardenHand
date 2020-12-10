@@ -34,14 +34,6 @@
             android:label="@string/title_activity_add_garden"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".PlantWishList"
-            android:label="@string/title_activity_plant_wish_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".GardenHistory"
-            android:label="@string/title_activity_garden_history"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".GardenGallery"
             android:label="@string/title_activity_garden_gallery"
             android:theme="@style/AppTheme.NoActionBar" />
