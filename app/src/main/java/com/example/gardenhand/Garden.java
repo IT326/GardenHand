@@ -52,7 +52,7 @@ public class Garden implements Serializable {
         db.collection("gardens").document(name).set(gardenMap);
     }
 
-    public Garden(DocumentReference gardenRef) {//grab garden from database
+    public Garden(DocumentReference gardenRef, int listIndex) {//grab garden from database
         //get garden name
         gardenRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -63,6 +63,7 @@ public class Garden implements Serializable {
                         Log.d("Garden Firestore", "DocumentSnapshot data: " + document.getData());
 
                         name = document.getId();
+                        Log.d("Garden Firestore", name);
                     }
                     else {
                         Log.d("Garden Firestore", "No such document");
@@ -89,6 +90,8 @@ public class Garden implements Serializable {
                 }
             }
         });
+
+        this.listindex = listIndex;
     }
 
     public void setIndex(int index) {

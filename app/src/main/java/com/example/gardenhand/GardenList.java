@@ -40,9 +40,9 @@ public class GardenList extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final ListView listv = view.findViewById(R.id.gardenList);
         gardener = (Gardener) getActivity().getIntent().getSerializableExtra("Gardener");
-        gardens = (ArrayList<Garden>) getActivity().getIntent().getSerializableExtra("GardensList");
+        gardens = gardener.getGardens();
 
-        GardenListAdapter plAdapter = new GardenListAdapter(GardenList.this.getContext(), gardens,gardener);
+        GardenListAdapter plAdapter = new GardenListAdapter(GardenList.this.getContext(), gardener.getGardens(), gardener);
         //CustomAdapter customAdapter = new CustomAdapter(this, arrayList);
         listv.setAdapter(plAdapter);
 
