@@ -55,9 +55,10 @@ public class Plant implements Serializable {
         updateDB();
     }
 
-    public Plant(String dbGardenID, String dbPlantID) {//pull plant from database
+    public Plant(int listindex,String dbGardenID, String dbPlantID) {//pull plant from database
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        System.out.println(dbPlantID);
+       // if(db.collection("gardens").document(dbGardenID).collection("plants").document(dbPlantID) != null){
         DocumentReference docRef = db.collection("gardens").document(dbGardenID).collection("plants").document(dbPlantID);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -71,7 +72,7 @@ public class Plant implements Serializable {
                         id = Integer.parseInt(document.getId());
                         commonname = (String) document.get("commonname");
                         photourl = (String) document.get("photourl");
-                        plantHistory = (Dictionary) document.get("plantHistory");
+                        //plantHistory = (Dictionary) document.get("plantHistory");
                         Timestamp timestamp= (Timestamp) document.get("lastWater");
 
                         lastWater = timestamp.toDate();
@@ -87,6 +88,7 @@ public class Plant implements Serializable {
         });
 
         this.dbGardenID = dbGardenID;
+        this.listIndex = listindex;
     }
 
     public void addToDatabase(String dbGardenID) {
@@ -104,7 +106,7 @@ public class Plant implements Serializable {
         plantMap.put("daystowater", daystowater);
         plantMap.put("plantHistory", plantHistory);
         plantMap.put("lastWater", lastWater);
-
+        //plantMap.put("lastWater", lastWater);
         db.collection("gardens").document(dbGardenID).collection("plants").document(Integer.toString(id)).set(plantMap);
 
 

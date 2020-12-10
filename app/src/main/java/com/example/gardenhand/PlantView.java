@@ -31,7 +31,7 @@ public class PlantView extends AppCompatActivity {
         ImageView image;
         TextView name;
         TextView lastwater;
-        TextView createdate;
+        //TextView createdate;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_view);
         createNotificationChannels();
@@ -44,8 +44,8 @@ public class PlantView extends AppCompatActivity {
        name.setText(plant.commonname);
        lastwater = findViewById(R.id.lastwatertext);
        lastwater.setText(plant.lastWater.toString());
-        createdate = findViewById(R.id.dateCreatedtext);
-        createdate.setText(plant.createDate.toString());
+        //createdate = findViewById(R.id.dateCreatedtext);
+        //createdate.setText(plant.createDate.toString());
 
         Picasso.with(this).load(plant.photourl).into(image);
     }

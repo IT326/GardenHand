@@ -31,7 +31,7 @@ public class GardenHistory extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        user = (Gardener) getIntent().getSerializableExtra("Gardener");
+        user = (Gardener) getIntent().getSerializableExtra("gardener");
 
         lv = (ListView) findViewById(R.id.list_view);
 
@@ -52,11 +52,11 @@ public class GardenHistory extends AppCompatActivity {
 
     }
 
-    /*
+
     public void onBackPressed(){
         //logout
         Intent intent = new Intent(this, GardenManager.class);
-        intent.putExtra("Gardener", user);
+        intent.putExtra("gardener", user);
         startActivity(intent);
-    }*/
+    }
 }

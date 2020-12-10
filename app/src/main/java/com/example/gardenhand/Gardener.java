@@ -32,6 +32,9 @@ public class Gardener implements Serializable  {
    public String getUsername(){
        return credentials.getuserID();
    }
+    public String getPass(){
+        return credentials.getpass();
+    }
    public ArrayList<Garden> getGardens(){
        return  data.getGardens();
    }
@@ -70,7 +73,7 @@ public class Gardener implements Serializable  {
     public String getFeaturedPlant(){return social.getFeaturedPlant();}
 
     public void setWishlist(ArrayList<String> wl){data.wishlist = wl;}
-    public ArrayList<String> getWishlist(){return data.wishlist;};
+    public ArrayList<String> getWishlist(){return data.getWishlist();}
 
     public void setGardenHistory(ArrayList<String> gh){data.gardenHistory = gh;}
     public ArrayList<String> getGardenHistory(){return data.gardenHistory;}

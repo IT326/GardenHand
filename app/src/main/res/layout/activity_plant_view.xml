@@ -28,35 +28,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/compareButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="48dp"
-        android:text="Compare to Friends"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgsrc" />
-
-    <Button
-        android:id="@+id/plantFamilybutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="28dp"
-        android:text="Plant family track"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compareButton" />
-
-    <Button
         android:id="@+id/RemoveFromGarden"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Remove From Garden"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="24dp"
         android:onClick="removeButtonClick"
+        android:text="Remove From Garden"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantFamilybutton" />
+        app:layout_constraintTop_toBottomOf="@+id/waterbutton" />
 
     <TextView
         android:id="@+id/lastwatertext"
@@ -68,24 +48,14 @@
         app:layout_constraintStart_toEndOf="@+id/imgsrc"
         app:layout_constraintTop_toBottomOf="@+id/nametext" />
 
-    <TextView
-        android:id="@+id/dateCreatedtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="52dp"
-        android:text="date Created"
-        app:layout_constraintStart_toEndOf="@+id/imgsrc"
-        app:layout_constraintTop_toBottomOf="@+id/lastwatertext" />
-
     <Button
         android:id="@+id/waterbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="192dp"
-        android:text="Water Plant"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
         android:onClick="createNotification"
-        app:layout_constraintStart_toEndOf="@+id/compareButton"
-        app:layout_constraintTop_toBottomOf="@+id/dateCreatedtext" />
+        android:text="Water Plant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgsrc" />
 </androidx.constraintlayout.widget.ConstraintLayout>

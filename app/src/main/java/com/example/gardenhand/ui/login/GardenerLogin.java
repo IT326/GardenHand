@@ -148,7 +148,7 @@ public class GardenerLogin extends AppCompatActivity {
                     });
 
             //create gardener for now default
-            Gardener gardener = new Gardener(user, pass);
+           // Gardener gardener = new Gardener(user, pass);
             // or "sign in gardener" get gardener when make a sign in or create button
 
             //pass Gardener in and open it in GardenManger class
@@ -156,7 +156,7 @@ public class GardenerLogin extends AppCompatActivity {
             //intent.putExtra("Gardener",gardener);
             intent.putExtra("user", user);
             intent.putExtra("pass", pass);
-            intent.putExtra("gardener",gardener);
+           // intent.putExtra("gardener",gardener);
             //gardener created when enter gardenManager
             startActivity(intent);
 
@@ -177,12 +177,12 @@ public class GardenerLogin extends AppCompatActivity {
             @Override
             public void onComplete(boolean result) {
                 if(result){
-                    Gardener gardener = new Gardener(un, pw);
+                    //Gardener gardener = new Gardener(un, pw);
                     //System.out.println(gardener.getGardens().size());
                     Intent intent = new Intent(GardenerLogin.this, GardenManager.class);
-                    //intent.putExtra("user", un);
-                    //intent.putExtra("pass", pw);
-                    intent.putExtra("gardener",gardener);
+                    intent.putExtra("user", un);
+                    intent.putExtra("pass", pw);
+                    //intent.putExtra("gardener",gardener);
                     startActivity(intent);
                 }else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GardenerLogin.this);

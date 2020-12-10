@@ -86,7 +86,7 @@ public class Garden implements Serializable {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        plantList.add(new Plant(name, document.getId()));
+                        plantList.add(new Plant(plantList.size(),name, document.getId()));
                     }
                     Log.d("Garden Firestore", plantList.toString());
                 } else {

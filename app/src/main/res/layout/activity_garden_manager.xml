@@ -11,7 +11,7 @@
         android:id="@+id/featuredPlant"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="featured plant"
+        android:text="Beans"
         android:textSize="20sp"
         android:gravity="center_horizontal"
         android:onClick="featuredPlantClick"
@@ -20,16 +20,6 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
-    <Button
-        android:id="@+id/historyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="60dp"
-        android:onClick="historyButtonClick"
-        android:text="Garden History"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/friendsListButton" />
 
     <Button
         android:id="@+id/wishlistButton"
@@ -40,7 +30,7 @@
         android:onClick="wishlistButtonClick"
         android:text="Wish List"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/featuredPlant" />
 
 
     <Button

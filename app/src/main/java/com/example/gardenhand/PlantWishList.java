@@ -36,7 +36,7 @@ public class PlantWishList extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        user = (Gardener) getIntent().getSerializableExtra("Gardener");
+        user = (Gardener) getIntent().getSerializableExtra("gardener");
 
         wantedPlants = user.getWishlist();
 
@@ -125,11 +125,11 @@ public class PlantWishList extends AppCompatActivity{
         });
         builder.show();
     }
-/*
+
     public void onBackPressed(){
         //logout
         Intent intent = new Intent(this, GardenManager.class);
-        intent.putExtra("Gardener", user);
+        intent.putExtra("gardener", user);
         startActivity(intent);
-    }*/
+    }
 }

@@ -29,14 +29,18 @@ public class GardenManager extends AppCompatActivity {
        // String user = (String) getIntent().getSerializableExtra("user");
        // String pass = (String) getIntent().getSerializableExtra("pass");
         user = (Gardener) getIntent().getSerializableExtra("gardener");
+
+        if(user == null) {
+            user = new Gardener((String) getIntent().getSerializableExtra("user"), (String) getIntent().getSerializableExtra("pass"));
+
+            System.out.println(user);
+            System.out.println(user.getGardens().size());
+        }
+
         TextView textView = (TextView) toolbar.findViewById(R.id.usernametext);
         textView.setText("Welcome! "+user.getUsername()+": Garden Manager");
 
 
-       // Gardener gardener = new Gardener(user,pass);
-       // this.user = gardener;
-        System.out.println(user);
-        System.out.println(user.getGardens().size());
 
         featuredP = findViewById(R.id.featuredPlant);
         if(user.getFeaturedPlant().equals(""))
@@ -96,7 +100,7 @@ public class GardenManager extends AppCompatActivity {
 
     public void wishlistButtonClick (View view){
         Intent intent = new Intent(this, PlantWishList.class);
-        intent.putExtra("Gardener", user);
+        intent.putExtra("gardener", user);
         startActivity(intent);
 
     }
